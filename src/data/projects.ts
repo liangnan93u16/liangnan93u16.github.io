@@ -1,4 +1,4 @@
-export type ProjectStatus = "completed" | "in-progress" | "planned";
+export type ProjectStatus = "completed" | "delivered" | "in-progress" | "planned";
 
 export interface Project {
   id: string;
@@ -18,6 +18,7 @@ export interface Project {
 
 export const statusConfig: Record<ProjectStatus, { text: string; cls: string }> = {
   completed: { text: "已完成", cls: "bg-[#ebf5ff] text-[#0a72ef] border-[#0a72ef]/20" },
+  delivered: { text: "已交付", cls: "bg-[#ebf5ff] text-[#0a72ef] border-[#0a72ef]/20" },
   "in-progress": { text: "开发中", cls: "bg-[#fafafa] text-[#666] border-[#ebebeb]" },
   planned: { text: "规划中", cls: "bg-[#fafafa] text-[#808080] border-[#ebebeb]" },
 };
@@ -54,8 +55,8 @@ export const projects: Project[] = [
       "画框和背景可视化定制",
       "Google 一键登录",
     ],
-    status: "completed",
-    category: "Web 应用",
+    status: "delivered",
+    category: "客户定制",
   },
   {
     id: "rpi-love-calculator",
