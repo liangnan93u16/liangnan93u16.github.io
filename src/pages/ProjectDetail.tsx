@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
 import {
   ArrowLeft,
@@ -7,20 +7,9 @@ import {
   ExternalLink,
   Download,
 } from "lucide-react";
-import { getProjectById, badgeConfig, badgeDefaultCls } from "../data/projects";
+import { getProjectById, badgeConfig, badgeDefaultCls, SITE_URL, getApplicationCategory } from "../data/projects";
 import StatusBadge from "../components/StatusBadge";
 import Lightbox from "../components/Lightbox";
-
-const SITE_URL = "https://liangnan93u16.github.io";
-
-function getApplicationCategory(category: string): string {
-  const map: Record<string, string> = {
-    "桌面应用": "UtilitiesApplication",
-    "教育工具": "EducationalApplication",
-    "客户定制": "BusinessApplication",
-  };
-  return map[category] ?? "SoftwareApplication";
-}
 
 function ProjectLink({
   href,
@@ -52,13 +41,12 @@ export default function ProjectDetail() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   if (!project) {
-    const notFoundTitle = "项目未找到 · 灵动工作室产品集";
     return (
       <div className="max-w-3xl mx-auto px-6 py-20 text-center">
         <Helmet>
-          <title>{notFoundTitle}</title>
+          <title>项目未找到 · 灵动工作室产品集</title>
           <meta name="description" content="该项目不存在或已被移除。" />
-          <meta property="og:title" content={notFoundTitle} />
+          <meta property="og:title" content="项目未找到 · 灵动工作室产品集" />
           <meta property="og:description" content="该项目不存在或已被移除。" />
         </Helmet>
         <h1 className="text-2xl font-semibold text-[#171717] mb-4 dark:text-[#f5f5f5] transition-colors">项目未找到</h1>

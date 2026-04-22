@@ -65,6 +65,12 @@ export const badgeConfig: Record<string, string> = {
 };
 export const badgeDefaultCls = "bg-[#fafafa] text-[#666] border-[#ebebeb] dark:bg-[#262626] dark:text-[#a3a3a3] dark:border-[#404040]";
 
+export const applicationCategoryMap: Record<string, string> = {
+  "桌面应用": "UtilitiesApplication",
+  "教育工具": "EducationalApplication",
+  "客户定制": "BusinessApplication",
+};
+
 export const projects: Project[] = [
   {
     id: "art-gallery-ecommerce",
@@ -434,6 +440,20 @@ export const projects: Project[] = [
   },
 ];
 
+export const SITE_URL = "https://liangnan93u16.github.io";
+export const SITE_TITLE = "灵动工作室产品集 · 个人开发者项目展示";
+export const SITE_DESC =
+  "灵动工作室产品集 — 个人开发者项目展示，涵盖电商平台、桌面应用、教育工具等领域，每一款产品都源于真实需求，致力于提供简单好用的解决方案。";
+
 export function getProjectById(id: string): Project | undefined {
   return projects.find((p) => p.id === id);
+}
+
+export function getApplicationCategory(category: string): string {
+  const map: Record<string, string> = {
+    "桌面应用": "UtilitiesApplication",
+    "教育工具": "EducationalApplication",
+    "客户定制": "BusinessApplication",
+  };
+  return map[category] ?? "SoftwareApplication";
 }
