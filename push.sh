@@ -3,6 +3,9 @@ set -e
 
 cd "$(dirname "$0")"
 
+# 先同步远程分支引用，避免 origin/main 不存在导致检测失败
+git fetch origin --quiet 2>/dev/null || true
+
 # 检查是否有未推送的 commit
 UNPUSHED=$(git rev-list --count origin/main..HEAD 2>/dev/null || echo "0")
 
