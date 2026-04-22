@@ -54,7 +54,6 @@ export default function ProjectDetail() {
     <>
       <div className="flex flex-col min-h-[calc(100svh-56px)]">
         <div className="max-w-6xl mx-auto px-6 py-8 w-full flex-1">
-          {/* Breadcrumb */}
           <Link
             to="/"
             className="inline-flex items-center gap-2 text-sm text-[#666] hover:text-[#171717] transition-colors mb-8"
@@ -63,7 +62,6 @@ export default function ProjectDetail() {
             返回项目列表
           </Link>
 
-          {/* Header */}
           <div className="mb-12">
             <div className="flex flex-wrap items-center gap-2 mb-4">
               <span className="text-xs font-medium text-[#666] bg-[#fafafa] px-3 py-1 rounded-full border border-[#ebebeb]">
@@ -95,7 +93,6 @@ export default function ProjectDetail() {
             </p>
           </div>
 
-          {/* Links */}
           <div className="flex flex-wrap gap-3 mb-12">
             {project.githubUrl && (
               <ProjectLink href={project.githubUrl} icon={Code2} variant="primary">
@@ -115,7 +112,6 @@ export default function ProjectDetail() {
           </div>
 
           <div className="space-y-10">
-            {/* Images */}
             {project.images && project.images.length > 0 && (
               <section className="space-y-12">
                 {project.images.map((img, i) => (
@@ -145,15 +141,13 @@ export default function ProjectDetail() {
               </section>
             )}
 
-            {/* Description */}
             <section>
-              <h2 className="text-xl font-semibold text-[#171717] mb-4 tracking-tight">项目介绍</h2>
+              <h2 className="text-2xl font-semibold text-[#171717] mb-6 tracking-tight">项目介绍</h2>
               <p className="text-[#666] leading-relaxed whitespace-pre-line">
                 {project.description}
               </p>
             </section>
 
-            {/* Highlights */}
             <section>
               <h2 className="text-2xl font-semibold text-[#171717] mb-6 tracking-tight">核心亮点</h2>
               <div className="grid sm:grid-cols-2 gap-4">
@@ -168,24 +162,22 @@ export default function ProjectDetail() {
               </div>
             </section>
 
-            {/* Features */}
             <section>
               <h2 className="text-2xl font-semibold text-[#171717] mb-6 tracking-tight">功能特性</h2>
-              <div className="grid sm:grid-cols-2 gap-x-8 gap-y-4">
+              <ul className="grid sm:grid-cols-2 gap-x-8 gap-y-4">
                 {project.features.map((feature, i) => (
-                  <div key={i} className="flex items-start gap-3">
+                  <li key={i} className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 rounded-full bg-[#171717] mt-2 shrink-0" />
                     <span className="text-[#666] leading-relaxed">{feature}</span>
-                  </div>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </section>
 
           </div>
         </div>
       </div>
 
-      {/* Lightbox */}
       {lightboxIndex !== null && project.images && (
         <Lightbox
           images={project.images}
