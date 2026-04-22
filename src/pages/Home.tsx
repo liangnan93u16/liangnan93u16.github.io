@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ExternalLink, Layers, Sparkles } from "lucide-react";
+import { ArrowRight, ExternalLink, Layers } from "lucide-react";
 import { projects, onlineStatuses } from "../data/projects";
 import StatusBadge from "../components/StatusBadge";
 
@@ -10,10 +10,6 @@ export default function Home() {
       <section className="pt-10 pb-6 sm:pt-14 sm:pb-8">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-6">
-            <div className="inline-flex items-center gap-2 bg-[#fafafa] border border-[#ebebeb] rounded-full px-3 py-1 text-xs text-[#666] mb-4">
-              <Sparkles className="w-3.5 h-3.5 text-[#0a72ef]" />
-              独立开发者的产品集合
-            </div>
             <h1 className="text-3xl sm:text-4xl lg:text-[40px] font-semibold text-[#171717] tracking-[-2px] mb-3 leading-[1.1]">
               实用的工具，解决真实问题
             </h1>

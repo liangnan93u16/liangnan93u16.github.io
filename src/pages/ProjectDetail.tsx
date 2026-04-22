@@ -69,7 +69,7 @@ export default function ProjectDetail() {
               <span className="text-xs bg-[#fafafa] text-[#666] px-2.5 py-1 rounded-full border border-[#ebebeb]">
                 {project.category}
               </span>
-              <StatusBadge status={project.status} />
+              {project.id !== "rpi-love-calculator" && <StatusBadge status={project.status} />}
               {project.badges?.map((badge) => {
                 const cls =
                   badge === "开源"
