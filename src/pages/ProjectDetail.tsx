@@ -98,18 +98,28 @@ export default function ProjectDetail() {
         <div className="space-y-10">
           {/* Images */}
           {project.images && project.images.length > 0 && (
-            <section>
-              <div className="grid gap-4">
-                {project.images.map((src, i) => (
+            <section className="space-y-12">
+              {project.images.map((img, i) => (
+                <div
+                  key={img.src}
+                  className={`flex flex-col ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} gap-6 md:gap-8 items-center`}
+                >
                   <img
-                    key={src}
-                    src={src}
-                    alt={`${project.name} 截图 ${i + 1}`}
-                    className="w-full rounded-lg border border-[#ebebeb] aspect-video object-cover"
+                    src={img.src}
+                    alt={img.title}
+                    className="w-full md:w-1/2 rounded-lg border border-[#ebebeb] aspect-video object-cover"
                     loading="lazy"
                   />
-                ))}
-              </div>
+                  <div className="w-full md:w-1/2 space-y-3">
+                    <h3 className="text-xl font-semibold text-[#171717] tracking-tight">
+                      {img.title}
+                    </h3>
+                    <p className="text-[#666] leading-relaxed">
+                      {img.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </section>
           )}
 
