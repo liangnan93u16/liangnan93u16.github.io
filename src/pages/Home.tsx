@@ -1,43 +1,11 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, ExternalLink } from "lucide-react";
-import { projects, onlineStatuses, badgeConfig, badgeDefaultCls } from "../data/projects";
+import { projects, badgeConfig, badgeDefaultCls } from "../data/projects";
 import StatusBadge from "../components/StatusBadge";
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-[calc(100svh-56px)]">
-      {/* Hero */}
-      <section className="pt-16 pb-10 sm:pt-24 sm:pb-14">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-10">
-            <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-semibold text-[#171717] tracking-[-2.5px] mb-5 leading-[1.08] dark:text-[#f5f5f5] transition-colors">
-              实用的工具，解决真实问题
-            </h1>
-            <p className="text-lg sm:text-xl text-[#666] max-w-2xl mx-auto leading-relaxed dark:text-[#a3a3a3] transition-colors">
-              每一款产品都源于真实需求，致力于提供简单好用的解决方案
-            </p>
-          </div>
-
-          {/* Stats */}
-          <div className="flex items-center justify-center gap-8 sm:gap-14">
-            <div className="text-center">
-              <div className="text-2xl sm:text-3xl font-semibold text-[#171717] tracking-tight dark:text-[#f5f5f5] transition-colors">{projects.length}</div>
-              <div className="text-sm text-[#666] mt-1 dark:text-[#a3a3a3] transition-colors">款产品</div>
-            </div>
-            <div className="w-px h-10 bg-[#ebebeb] dark:bg-[#262626] transition-colors" />
-            <div className="text-center">
-              <div className="text-2xl sm:text-3xl font-semibold text-[#171717] tracking-tight dark:text-[#f5f5f5] transition-colors">{projects.filter((p) => onlineStatuses.includes(p.status)).length}</div>
-              <div className="text-sm text-[#666] mt-1 dark:text-[#a3a3a3] transition-colors">已上线</div>
-            </div>
-            <div className="w-px h-10 bg-[#ebebeb] hidden sm:block dark:bg-[#262626] transition-colors" />
-            <div className="text-center hidden sm:block">
-              <div className="text-2xl sm:text-3xl font-semibold text-[#171717] tracking-tight dark:text-[#f5f5f5] transition-colors">2+</div>
-              <div className="text-sm text-[#666] mt-1 dark:text-[#a3a3a3] transition-colors">平台</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Products */}
       <section className="py-6 flex-1">
         <div className="max-w-6xl mx-auto px-6">
@@ -106,7 +74,7 @@ export default function Home() {
                       )}
                       {project.downloads?.map(({ label, url }) => (
                         <a
-                          key={url}
+                          key={label}
                           href={url}
                           target="_blank"
                           rel="noopener noreferrer"

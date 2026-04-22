@@ -16,12 +16,15 @@ export default function Header() {
 
   return (
     <header className="border-b border-black/5 bg-white/80 backdrop-blur-md sticky top-0 z-50 dark:border-white/10 dark:bg-[#0a0a0a]/80 transition-colors duration-300">
-      <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 text-[#171717] hover:text-black transition-colors dark:text-[#f5f5f5] dark:hover:text-white">
+      <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between gap-4">
+        <Link to="/" className="flex items-center gap-2 text-[#171717] hover:text-black transition-colors dark:text-[#f5f5f5] dark:hover:text-white shrink-0">
           <Code2 className="w-5 h-5" />
           <span className="font-semibold text-lg tracking-tight">灵动工作室</span>
         </Link>
-        <nav className="flex items-center gap-6 text-sm">
+        <p className="text-sm text-[#666] truncate dark:text-[#a3a3a3] transition-colors hidden sm:block">
+          每一款产品都源于真实需求，致力于提供简单好用的解决方案
+        </p>
+        <nav className="flex items-center gap-6 text-sm shrink-0">
           <a
             href="https://www.xiaohongshu.com/user/profile/62b01cca00000000190288cc"
             target="_blank"

@@ -109,7 +109,7 @@ export default function ProjectDetail() {
               </ProjectLink>
             )}
             {project.downloads?.map(({ label, url }) => (
-              <ProjectLink key={url} href={url} icon={Download}>
+              <ProjectLink key={label} href={url} icon={Download}>
                 {label}
               </ProjectLink>
             ))}
