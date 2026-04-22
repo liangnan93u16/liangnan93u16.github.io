@@ -54,6 +54,13 @@ export const projects: Project[] = [
       "画框和背景可视化定制",
       "Google 一键登录",
     ],
+    images: [
+      "/images/art-gallery/1.png",
+      "/images/art-gallery/2.png",
+      "/images/art-gallery/3.png",
+      "/images/art-gallery/5.png",
+      "/images/art-gallery/6.png",
+    ],
     status: "completed",
     category: "Web 应用",
   },
