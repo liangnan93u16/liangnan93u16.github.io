@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Code2, ExternalLink, Download, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Code2, ExternalLink, Download, CheckCircle2, Zap } from "lucide-react";
 import { getProjectById, statusConfig } from "../data/projects";
 import StatusBadge from "../components/StatusBadge";
 
@@ -99,6 +99,29 @@ export default function ProjectDetail() {
               </p>
             </section>
 
+            {/* Highlights — 重点突出 */}
+            <section>
+              <div className="flex items-center gap-2 mb-5">
+                <Zap className="w-5 h-5 text-[#0a72ef]" />
+                <h2 className="text-xl font-semibold text-[#171717] tracking-tight">核心亮点</h2>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {project.highlights.map((h, i) => (
+                  <div
+                    key={i}
+                    className="bg-white border border-[#ebebeb] rounded-lg p-5 hover:border-[#171717] hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] transition-all duration-200"
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-md bg-[#ebf5ff] flex items-center justify-center shrink-0 mt-0.5">
+                        <span className="text-sm font-semibold text-[#0a72ef]">{i + 1}</span>
+                      </div>
+                      <p className="text-[#171717] text-sm font-medium leading-relaxed">{h}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
             {/* Features */}
             <section>
               <h2 className="text-xl font-semibold text-[#171717] mb-4 tracking-tight">功能特性</h2>
@@ -110,25 +133,6 @@ export default function ProjectDetail() {
                   </li>
                 ))}
               </ul>
-            </section>
-
-            {/* Highlights */}
-            <section>
-              <h2 className="text-xl font-semibold text-[#171717] mb-4 tracking-tight">核心亮点</h2>
-              <div className="grid sm:grid-cols-2 gap-4">
-                {project.highlights.map((h, i) => (
-                  <div
-                    key={i}
-                    className="bg-[#fafafa] border border-[#ebebeb] rounded-lg p-4"
-                  >
-                    <div className="flex items-center gap-2 mb-1">
-                      <div className="w-2 h-2 rounded-full bg-[#0a72ef]" />
-                      <span className="font-medium text-[#171717] text-sm">亮点 {i + 1}</span>
-                    </div>
-                    <p className="text-[#666] text-sm leading-relaxed">{h}</p>
-                  </div>
-                ))}
-              </div>
             </section>
           </div>
 

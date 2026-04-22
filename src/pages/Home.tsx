@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ExternalLink, Heart, Layers, Sparkles } from "lucide-react";
+import { ArrowRight, ExternalLink, Heart, Layers, Sparkles, Zap } from "lucide-react";
 import { projects } from "../data/projects";
 import StatusBadge from "../components/StatusBadge";
 
 const stats = [
-  { icon: Layers, label: "项目总数", value: () => String(projects.length) },
-  { icon: Heart, label: "已完成", value: () => String(projects.filter((p) => p.status === "completed").length) },
+  { icon: Layers, label: "产品数量", value: () => String(projects.length) },
+  { icon: Heart, label: "已上线", value: () => String(projects.filter((p) => p.status === "completed").length) },
   { icon: Sparkles, label: "开发中", value: () => String(projects.filter((p) => p.status === "in-progress").length) },
-  { icon: ExternalLink, label: "开源项目", value: () => String(projects.filter((p) => p.githubUrl).length) },
+  { icon: Zap, label: "覆盖平台", value: () => "2+" },
 ];
 
 export default function Home() {
@@ -18,14 +18,14 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 text-center">
           <div className="inline-flex items-center gap-2 bg-[#fafafa] border border-[#ebebeb] rounded-full px-4 py-1.5 text-sm text-[#666] mb-8">
             <Sparkles className="w-4 h-4 text-[#0a72ef]" />
-            独立开发者的项目集合
+            独立开发者的产品集合
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-[48px] font-semibold text-[#171717] tracking-[-2.4px] mb-6 leading-[1]">
-            构建有价值的产品
+            实用的工具，解决真实问题
           </h1>
           <p className="text-lg sm:text-xl text-[#666] max-w-2xl mx-auto leading-relaxed">
-            这里记录了我独立开发的各类项目，从桌面应用到 Web 工具，
-            每一个都源于真实需求，追求极致的用户体验。
+            这里展示的是我独立开发的各类产品，每一款都源于真实的使用需求，
+            致力于为用户提供简单、好用的解决方案。
           </p>
         </div>
       </section>
@@ -45,12 +45,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Projects */}
+      {/* Products */}
       <section className="py-16 flex-1">
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-semibold text-[#171717] tracking-tight">项目展示</h2>
-            <span className="text-sm text-[#666]">共 {projects.length} 个项目</span>
+            <h2 className="text-2xl font-semibold text-[#171717] tracking-tight">产品展示</h2>
+            <span className="text-sm text-[#666]">共 {projects.length} 款产品</span>
           </div>
 
           <div className="grid gap-6">
@@ -78,18 +78,19 @@ export default function Home() {
                   {project.description}
                 </p>
 
+                {/* Highlights instead of tech stack */}
                 <div className="flex flex-wrap gap-2 mb-5">
-                  {project.techStack.slice(0, 4).map((tech) => (
+                  {project.highlights.slice(0, 3).map((h, i) => (
                     <span
-                      key={tech.category}
-                      className="text-xs bg-[#fafafa] text-[#666] px-2.5 py-1 rounded-md border border-[#ebebeb]"
+                      key={i}
+                      className="text-xs bg-[#ebf5ff] text-[#0a72ef] px-2.5 py-1 rounded-full font-medium"
                     >
-                      {tech.items}
+                      {h}
                     </span>
                   ))}
-                  {project.techStack.length > 4 && (
+                  {project.highlights.length > 3 && (
                     <span className="text-xs text-[#808080] px-2 py-1">
-                      +{project.techStack.length - 4}
+                      +{project.highlights.length - 3}
                     </span>
                   )}
                 </div>
@@ -99,7 +100,7 @@ export default function Home() {
                     to={`/project/${project.id}`}
                     className="inline-flex items-center gap-1.5 text-sm font-medium text-[#171717] hover:text-black transition-colors"
                   >
-                    查看详情
+                    了解更多
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                   {project.githubUrl && (
