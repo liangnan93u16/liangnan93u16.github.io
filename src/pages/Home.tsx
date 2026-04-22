@@ -84,21 +84,19 @@ export default function Home() {
                           <ExternalLink className="w-3.5 h-3.5" />
                         </a>
                       ))}
-                      <div className="flex flex-wrap gap-2">
-                        {project.highlights.slice(0, 3).map(({ text }) => (
-                          <span
-                            key={text}
-                            className="text-xs bg-[#ebf5ff] text-[#0a72ef] px-2 py-0.5 rounded-full font-medium dark:bg-[#1e3a5f] dark:text-[#60a5fa] transition-colors"
-                          >
-                            {text}
-                          </span>
-                        ))}
-                        {project.highlights.length > 3 && (
-                          <span className="text-xs text-[#808080] px-1.5 py-0.5 dark:text-[#737373] transition-colors">
-                            +{project.highlights.length - 3}
-                          </span>
-                        )}
-                      </div>
+                      {project.highlights.slice(0, 3).map(({ text }) => (
+                        <span
+                          key={text}
+                          className="text-xs bg-[#ebf5ff] text-[#0a72ef] px-2 py-0.5 rounded-full font-medium dark:bg-[#1e3a5f] dark:text-[#60a5fa] transition-colors"
+                        >
+                          {text}
+                        </span>
+                      ))}
+                      {project.highlights.length > 3 && (
+                        <span className="text-xs text-[#808080] px-1.5 py-0.5 dark:text-[#737373] transition-colors">
+                          +{project.highlights.length - 3}
+                        </span>
+                      )}
                     </div>
                     <Link
                       to={projectUrl}

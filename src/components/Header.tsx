@@ -19,7 +19,7 @@ export default function Header() {
       <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between gap-4">
         <Link to="/" className="flex items-center gap-2 text-[#171717] hover:text-black transition-colors dark:text-[#f5f5f5] dark:hover:text-white shrink-0">
           <Code2 className="w-5 h-5" />
-          <span className="font-semibold text-lg tracking-tight">灵动工作室</span>
+          <span className="font-semibold text-lg tracking-tight">灵动工作室产品集</span>
         </Link>
         <p className="text-sm text-[#666] truncate dark:text-[#a3a3a3] transition-colors hidden sm:block">
           每一款产品都源于真实需求，致力于提供简单好用的解决方案
