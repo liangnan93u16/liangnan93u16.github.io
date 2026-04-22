@@ -16,9 +16,9 @@ export interface Project {
 }
 
 export const statusConfig: Record<ProjectStatus, { text: string; cls: string }> = {
-  completed: { text: "已完成", cls: "bg-emerald-50 text-emerald-700 border-emerald-200" },
-  "in-progress": { text: "开发中", cls: "bg-amber-50 text-amber-700 border-amber-200" },
-  planned: { text: "规划中", cls: "bg-gray-100 text-gray-600 border-gray-200" },
+  completed: { text: "已完成", cls: "bg-[#ebf5ff] text-[#0a72ef] border-[#0a72ef]/20" },
+  "in-progress": { text: "开发中", cls: "bg-[#fafafa] text-[#666] border-[#ebebeb]" },
+  planned: { text: "规划中", cls: "bg-[#fafafa] text-[#808080] border-[#ebebeb]" },
 };
 
 export const projects: Project[] = [
