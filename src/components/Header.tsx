@@ -1,14 +1,11 @@
 import { useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Code2 } from "lucide-react";
-import { getProjectById } from "../data/projects";
 import ThemeToggle from "./ThemeToggle";
 
-const DEFAULT_GITHUB_URL = "https://github.com/liangnan93u16";
 const PROJECT_GITHUB_URLS: Record<string, string> = {
   "rpi-love-calculator": "https://github.com/liangnan93u16/LoveCalculatorApp",
 };
-const HIDE_GITHUB_FOR_PROJECTS = new Set(["art-gallery-ecommerce"]);
 const PROJECT_PATH_RE = /^\/project\/([^/]+)$/;
 
 export default function Header() {
@@ -16,12 +13,8 @@ export default function Header() {
   const { githubUrl, showGitHub } = useMemo(() => {
     const match = PROJECT_PATH_RE.exec(location.pathname);
     const projectId = match ? match[1] : null;
-    const hide = projectId ? HIDE_GITHUB_FOR_PROJECTS.has(projectId) : false;
-    if (projectId && PROJECT_GITHUB_URLS[projectId]) {
-      return { githubUrl: PROJECT_GITHUB_URLS[projectId], showGitHub: !hide };
-    }
-    const project = projectId ? getProjectById(projectId) : null;
-    return { githubUrl: project?.githubUrl ?? DEFAULT_GITHUB_URL, showGitHub: !hide };
+    const showGitHub = projectId === "rpi-love-calculator";
+    return { githubUrl: projectId ? PROJECT_GITHUB_URLS[projectId] : undefined, showGitHub };
   }, [location.pathname]);
 
   return (
