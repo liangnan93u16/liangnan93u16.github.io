@@ -70,6 +70,22 @@ export default function ProjectDetail() {
                 {project.category}
               </span>
               <StatusBadge status={project.status} />
+              {project.badges?.map((badge) => {
+                const cls =
+                  badge === "开源"
+                    ? "bg-green-50 text-green-600 border-green-200"
+                    : badge === "免费软件"
+                      ? "bg-orange-50 text-orange-600 border-orange-200"
+                      : "bg-[#fafafa] text-[#666] border-[#ebebeb]";
+                return (
+                  <span
+                    key={badge}
+                    className={`text-xs px-2.5 py-1 rounded-full border ${cls}`}
+                  >
+                    {badge}
+                  </span>
+                );
+              })}
             </div>
             <h1 className="text-3xl sm:text-4xl font-semibold text-[#171717] mb-3 tracking-tight">
               {project.name}

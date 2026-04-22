@@ -9,6 +9,7 @@ export interface Project {
   techStack: { category: string; items: string }[];
   highlights: string[];
   images?: { src: string; title: string; description: string }[];
+  badges?: string[];
   githubUrl?: string;
   demoUrl?: string;
   downloadUrl?: string;
@@ -120,6 +121,7 @@ export const projects: Project[] = [
         description: "不仅给出分数，更提供综合结果解释和关键发现，帮助你深入理解自己的恋爱心理特点，促进更健康的亲密关系。",
       },
     ],
+    badges: ["开源", "免费软件"],
     status: "completed",
     category: "桌面应用",
   },
