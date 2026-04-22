@@ -95,7 +95,6 @@ export const projects: Project[] = [
       "/images/rpi-love-calculator/5.png",
       "/images/rpi-love-calculator/6.png",
     ],
-    githubUrl: "https://github.com/liangnan93u16/rpi-love-calculator",
     status: "completed",
     category: "桌面应用",
   },
