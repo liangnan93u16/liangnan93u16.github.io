@@ -1,95 +1,87 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ExternalLink, Heart, Layers, Sparkles, Zap } from "lucide-react";
+import { ArrowRight, ExternalLink, Layers, Sparkles } from "lucide-react";
 import { projects } from "../data/projects";
 import StatusBadge from "../components/StatusBadge";
-
-const stats = [
-  { icon: Layers, label: "产品数量", value: () => String(projects.length) },
-  { icon: Heart, label: "已上线", value: () => String(projects.filter((p) => p.status === "completed").length) },
-  { icon: Sparkles, label: "开发中", value: () => String(projects.filter((p) => p.status === "in-progress").length) },
-  { icon: Zap, label: "覆盖平台", value: () => "2+" },
-];
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-[calc(100svh-56px)]">
-      {/* Hero */}
-      <section className="py-20 sm:py-28">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <div className="inline-flex items-center gap-2 bg-[#fafafa] border border-[#ebebeb] rounded-full px-4 py-1.5 text-sm text-[#666] mb-8">
-            <Sparkles className="w-4 h-4 text-[#0a72ef]" />
-            独立开发者的产品集合
-          </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-[48px] font-semibold text-[#171717] tracking-[-2.4px] mb-6 leading-[1]">
-            实用的工具，解决真实问题
-          </h1>
-          <p className="text-lg sm:text-xl text-[#666] max-w-2xl mx-auto leading-relaxed">
-            这里展示的是我独立开发的各类产品，每一款都源于真实的使用需求，
-            致力于为用户提供简单、好用的解决方案。
-          </p>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="py-12 border-b border-[#ebebeb]">
+      {/* Compact Hero + Stats */}
+      <section className="pt-10 pb-6 sm:pt-14 sm:pb-8">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-            {stats.map((stat) => (
-              <div key={stat.label} className="text-center">
-                <stat.icon className="w-5 h-5 text-[#171717] mx-auto mb-2" />
-                <div className="text-2xl font-semibold text-[#171717] tracking-tight">{stat.value()}</div>
-                <div className="text-sm text-[#666]">{stat.label}</div>
-              </div>
-            ))}
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center gap-2 bg-[#fafafa] border border-[#ebebeb] rounded-full px-3 py-1 text-xs text-[#666] mb-4">
+              <Sparkles className="w-3.5 h-3.5 text-[#0a72ef]" />
+              独立开发者的产品集合
+            </div>
+            <h1 className="text-3xl sm:text-4xl lg:text-[40px] font-semibold text-[#171717] tracking-[-2px] mb-3 leading-[1.1]">
+              实用的工具，解决真实问题
+            </h1>
+            <p className="text-base sm:text-lg text-[#666] max-w-xl mx-auto leading-relaxed">
+              每一款产品都源于真实需求，致力于提供简单好用的解决方案
+            </p>
+          </div>
+
+          {/* Inline stats */}
+          <div className="flex items-center justify-center gap-6 sm:gap-10 text-sm">
+            <div className="flex items-center gap-1.5">
+              <Layers className="w-4 h-4 text-[#171717]" />
+              <span className="font-semibold text-[#171717]">{projects.length}</span>
+              <span className="text-[#666]">款产品</span>
+            </div>
+            <div className="w-px h-4 bg-[#ebebeb]" />
+            <div className="flex items-center gap-1.5">
+              <span className="font-semibold text-[#171717]">{projects.filter((p) => p.status === "completed").length}</span>
+              <span className="text-[#666]">已上线</span>
+            </div>
+            <div className="w-px h-4 bg-[#ebebeb] hidden sm:block" />
+            <div className="hidden sm:flex items-center gap-1.5">
+              <span className="font-semibold text-[#171717]">2+</span>
+              <span className="text-[#666]">平台</span>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Products */}
-      <section className="py-16 flex-1">
+      <section className="py-6 flex-1">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-semibold text-[#171717] tracking-tight">产品展示</h2>
-            <span className="text-sm text-[#666]">共 {projects.length} 款产品</span>
-          </div>
-
-          <div className="grid gap-6">
+          <div className="grid gap-4">
             {projects.map((project) => (
               <div
                 key={project.id}
-                className="group bg-white border border-[#ebebeb] rounded-lg p-6 sm:p-8 hover:border-[#171717] hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)] transition-all duration-200"
+                className="group bg-white border border-[#ebebeb] rounded-lg p-5 sm:p-6 hover:border-[#171717] hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)] transition-all duration-200"
               >
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-3">
                   <div>
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-xl font-semibold text-[#171717] group-hover:text-black transition-colors tracking-tight">
+                    <div className="flex items-center gap-2.5 mb-1.5">
+                      <h3 className="text-lg font-semibold text-[#171717] group-hover:text-black transition-colors tracking-tight">
                         {project.name}
                       </h3>
                       <StatusBadge status={project.status} />
                     </div>
-                    <p className="text-[#666] leading-relaxed">{project.tagline}</p>
+                    <p className="text-[#666] text-sm leading-relaxed">{project.tagline}</p>
                   </div>
-                  <span className="text-xs text-[#808080] bg-[#fafafa] px-3 py-1 rounded-full border border-[#ebebeb] whitespace-nowrap">
+                  <span className="text-xs text-[#808080] bg-[#fafafa] px-2.5 py-0.5 rounded-full border border-[#ebebeb] whitespace-nowrap self-start">
                     {project.category}
                   </span>
                 </div>
 
-                <p className="text-[#666] text-sm leading-relaxed mb-5 line-clamp-2">
+                <p className="text-[#666] text-sm leading-relaxed mb-4 line-clamp-2">
                   {project.description}
                 </p>
 
-                {/* Highlights instead of tech stack */}
-                <div className="flex flex-wrap gap-2 mb-5">
+                <div className="flex flex-wrap gap-2 mb-4">
                   {project.highlights.slice(0, 3).map((h, i) => (
                     <span
                       key={i}
-                      className="text-xs bg-[#ebf5ff] text-[#0a72ef] px-2.5 py-1 rounded-full font-medium"
+                      className="text-xs bg-[#ebf5ff] text-[#0a72ef] px-2 py-0.5 rounded-full font-medium"
                     >
                       {h}
                     </span>
                   ))}
                   {project.highlights.length > 3 && (
-                    <span className="text-xs text-[#808080] px-2 py-1">
+                    <span className="text-xs text-[#808080] px-1.5 py-0.5">
                       +{project.highlights.length - 3}
                     </span>
                   )}
