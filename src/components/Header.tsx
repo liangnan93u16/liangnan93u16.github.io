@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Code2 } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
@@ -10,12 +9,10 @@ const PROJECT_PATH_RE = /^\/project\/([^/]+)$/;
 
 export default function Header() {
   const location = useLocation();
-  const { githubUrl, showGitHub } = useMemo(() => {
-    const match = PROJECT_PATH_RE.exec(location.pathname);
-    const projectId = match ? match[1] : null;
-    const showGitHub = projectId === "rpi-love-calculator";
-    return { githubUrl: projectId ? PROJECT_GITHUB_URLS[projectId] : undefined, showGitHub };
-  }, [location.pathname]);
+  const match = PROJECT_PATH_RE.exec(location.pathname);
+  const projectId = match ? match[1] : null;
+  const githubUrl = projectId ? PROJECT_GITHUB_URLS[projectId] : undefined;
+  const showGitHub = !!githubUrl;
 
   return (
     <header className="border-b border-black/5 bg-white/80 backdrop-blur-md sticky top-0 z-50 dark:border-white/10 dark:bg-[#0a0a0a]/80 transition-colors duration-300">
