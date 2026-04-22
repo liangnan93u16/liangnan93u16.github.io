@@ -72,9 +72,19 @@ export default function Home() {
                   </span>
                 </div>
 
-                <p className="text-[#666] text-sm leading-relaxed mb-4 line-clamp-2">
-                  {project.description}
-                </p>
+                <div className="flex flex-col sm:flex-row gap-4 mb-4">
+                  {project.images?.[0] && (
+                    <img
+                      src={project.images[0].src}
+                      alt={project.images[0].title}
+                      className="w-full sm:w-36 rounded-lg border border-[#ebebeb] aspect-video object-cover shrink-0"
+                      loading="lazy"
+                    />
+                  )}
+                  <p className="text-[#666] text-sm leading-relaxed line-clamp-2 flex-1">
+                    {project.description}
+                  </p>
+                </div>
 
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.highlights.slice(0, 3).map((h, i) => (
