@@ -8,6 +8,7 @@ export interface Project {
   features: string[];
   techStack: { category: string; items: string }[];
   highlights: string[];
+  images?: string[];
   githubUrl?: string;
   demoUrl?: string;
   downloadUrl?: string;

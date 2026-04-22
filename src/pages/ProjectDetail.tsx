@@ -96,6 +96,23 @@ export default function ProjectDetail() {
         </div>
 
         <div className="space-y-10">
+          {/* Images */}
+          {project.images && project.images.length > 0 && (
+            <section>
+              <div className="grid gap-4">
+                {project.images.map((src, i) => (
+                  <img
+                    key={i}
+                    src={src}
+                    alt={`${project.name} 截图 ${i + 1}`}
+                    className="w-full rounded-lg border border-[#ebebeb]"
+                    loading="lazy"
+                  />
+                ))}
+              </div>
+            </section>
+          )}
+
           {/* Description */}
           <section>
             <h2 className="text-xl font-semibold text-[#171717] mb-4 tracking-tight">项目介绍</h2>
