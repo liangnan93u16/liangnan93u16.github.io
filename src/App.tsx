@@ -4,13 +4,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import ProjectDetail from "./pages/ProjectDetail";
-
-function getInitialTheme(): "light" | "dark" {
-  if (typeof window === "undefined") return "light";
-  const stored = localStorage.getItem("theme");
-  if (stored === "dark" || stored === "light") return stored;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-}
+import { getInitialTheme } from "./utils/theme";
 
 export default function App() {
   const theme = getInitialTheme();

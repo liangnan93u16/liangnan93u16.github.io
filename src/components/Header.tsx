@@ -1,17 +1,15 @@
 import { Link, useLocation } from "react-router-dom";
 import { Code2 } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
+import { getProjectById } from "../data/projects";
 
-const PROJECT_GITHUB_URLS: Record<string, string> = {
-  "rpi-love-calculator": "https://github.com/liangnan93u16/LoveCalculatorApp",
-};
 const PROJECT_PATH_RE = /^\/project\/([^/]+)$/;
 
 export default function Header() {
   const location = useLocation();
   const match = PROJECT_PATH_RE.exec(location.pathname);
   const projectId = match ? match[1] : null;
-  const githubUrl = projectId ? PROJECT_GITHUB_URLS[projectId] : undefined;
+  const githubUrl = projectId ? getProjectById(projectId)?.githubUrl : undefined;
   const showGitHub = !!githubUrl;
 
   return (

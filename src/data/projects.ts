@@ -55,8 +55,6 @@ export const statusConfig: Record<ProjectStatus, { text: string; cls: string }> 
   planned: { text: "规划中", cls: "bg-[#fafafa] text-[#808080] border-[#ebebeb] dark:bg-[#262626] dark:text-[#737373] dark:border-[#404040]" },
 };
 
-export const onlineStatuses: ProjectStatus[] = ["completed", "delivered"];
-
 export const badgeConfig: Record<string, string> = {
   "开源": "bg-green-50 text-green-600 border-green-200 dark:bg-green-900/30 dark:text-green-400 dark:border-green-800",
   "免费软件": "bg-orange-50 text-orange-600 border-orange-200 dark:bg-orange-900/30 dark:text-orange-400 dark:border-orange-800",
