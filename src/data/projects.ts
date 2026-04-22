@@ -184,7 +184,6 @@ export const projects: Project[] = [
       },
     ],
     badges: ["开源", "免费软件"],
-    githubUrl: "https://github.com/liangnan93u16/LoveCalculator_mac_win_app",
     status: "completed",
     category: "桌面应用",
   },

@@ -1,7 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Code2 } from "lucide-react";
+import { getProjectById } from "../data/projects";
 
 export default function Header() {
+  const location = useLocation();
+  const projectMatch = location.pathname.match(/^\/project\/([^/]+)$/);
+  const projectId = projectMatch ? projectMatch[1] : null;
+  const project = projectId ? getProjectById(projectId) : null;
+  const projectGithubUrl = projectId === "rpi-love-calculator"
+    ? "https://github.com/liangnan93u16/LoveCalculatorApp"
+    : null;
+  const githubUrl = projectGithubUrl ?? project?.githubUrl ?? "https://github.com/liangnan93u16";
+
   return (
     <header className="border-b border-[#ebebeb] bg-white/80 backdrop-blur sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
@@ -14,7 +24,7 @@ export default function Header() {
             首页
           </Link>
           <a
-            href="https://github.com/liangnan93u16"
+            href={githubUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="text-[#666] hover:text-[#171717] transition-colors"
