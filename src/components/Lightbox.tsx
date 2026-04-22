@@ -35,6 +35,21 @@ export default function Lightbox({ images, index, onClose, onChange }: LightboxP
   const image = images[index];
   if (!image) return null;
 
+  const navButtons = [
+    {
+      show: index > 0,
+      position: "left-4" as const,
+      Icon: ChevronLeft,
+      onClick: handlePrev,
+    },
+    {
+      show: index < images.length - 1,
+      position: "right-4" as const,
+      Icon: ChevronRight,
+      onClick: handleNext,
+    },
+  ];
+
   return (
     <div
       className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center"
@@ -47,28 +62,20 @@ export default function Lightbox({ images, index, onClose, onChange }: LightboxP
         <X className="w-6 h-6" />
       </button>
 
-      {index > 0 && (
-        <button
-          className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors p-2"
-          onClick={(e) => {
-            e.stopPropagation();
-            handlePrev();
-          }}
-        >
-          <ChevronLeft className="w-8 h-8" />
-        </button>
-      )}
-
-      {index < images.length - 1 && (
-        <button
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors p-2"
-          onClick={(e) => {
-            e.stopPropagation();
-            handleNext();
-          }}
-        >
-          <ChevronRight className="w-8 h-8" />
-        </button>
+      {navButtons.map(
+        ({ show, position, Icon, onClick }) =>
+          show && (
+            <button
+              key={position}
+              className={`absolute ${position} top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors p-2`}
+              onClick={(e) => {
+                e.stopPropagation();
+                onClick();
+              }}
+            >
+              <Icon className="w-8 h-8" />
+            </button>
+          )
       )}
 
       <img
