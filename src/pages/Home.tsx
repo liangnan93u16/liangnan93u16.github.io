@@ -1,11 +1,55 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, ExternalLink } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 import { projects, badgeConfig, badgeDefaultCls } from "../data/projects";
 import StatusBadge from "../components/StatusBadge";
 
+const SITE_URL = "https://liangnan93u16.github.io";
+const SITE_TITLE = "灵动工作室产品集 · 个人开发者项目展示";
+const SITE_DESC = "灵动工作室产品集 — 个人开发者项目展示，涵盖电商平台、桌面应用、教育工具等领域，每一款产品都源于真实需求，致力于提供简单好用的解决方案。";
+
 export default function Home() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": `${SITE_URL}/#person`,
+        name: "灵动工作室",
+        url: SITE_URL,
+        description: SITE_DESC,
+        sameAs: ["https://github.com/liangnan93u16"],
+      },
+      {
+        "@type": "ItemList",
+        itemListElement: projects.map((project, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          url: `${SITE_URL}/project/${project.id}`,
+          name: project.name,
+          description: project.tagline,
+        })),
+      },
+    ],
+  };
+
   return (
     <div className="flex flex-col min-h-[calc(100svh-56px)]">
+      <Helmet>
+        <title>{SITE_TITLE}</title>
+        <meta name="description" content={SITE_DESC} />
+        <link rel="canonical" href={SITE_URL} />
+        <meta property="og:title" content={SITE_TITLE} />
+        <meta property="og:description" content={SITE_DESC} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={SITE_URL} />
+        <meta property="og:locale" content="zh_CN" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={SITE_TITLE} />
+        <meta name="twitter:description" content={SITE_DESC} />
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      </Helmet>
+
       {/* Products */}
       <section className="py-6 flex-1">
         <div className="max-w-6xl mx-auto px-6">

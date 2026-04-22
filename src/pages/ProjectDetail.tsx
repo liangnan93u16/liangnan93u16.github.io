@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import {
   ArrowLeft,
   Code2,
@@ -9,6 +10,17 @@ import {
 import { getProjectById, badgeConfig, badgeDefaultCls } from "../data/projects";
 import StatusBadge from "../components/StatusBadge";
 import Lightbox from "../components/Lightbox";
+
+const SITE_URL = "https://liangnan93u16.github.io";
+
+function getApplicationCategory(category: string): string {
+  const map: Record<string, string> = {
+    "桌面应用": "UtilitiesApplication",
+    "教育工具": "EducationalApplication",
+    "客户定制": "BusinessApplication",
+  };
+  return map[category] ?? "SoftwareApplication";
+}
 
 function ProjectLink({
   href,
@@ -40,8 +52,15 @@ export default function ProjectDetail() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   if (!project) {
+    const notFoundTitle = "项目未找到 · 灵动工作室产品集";
     return (
       <div className="max-w-3xl mx-auto px-6 py-20 text-center">
+        <Helmet>
+          <title>{notFoundTitle}</title>
+          <meta name="description" content="该项目不存在或已被移除。" />
+          <meta property="og:title" content={notFoundTitle} />
+          <meta property="og:description" content="该项目不存在或已被移除。" />
+        </Helmet>
         <h1 className="text-2xl font-semibold text-[#171717] mb-4 dark:text-[#f5f5f5] transition-colors">项目未找到</h1>
         <p className="text-[#666] mb-6 dark:text-[#a3a3a3] transition-colors">该项目不存在或已被移除。</p>
         <Link
@@ -55,8 +74,51 @@ export default function ProjectDetail() {
     );
   }
 
+  const pageUrl = `${SITE_URL}/project/${project.id}`;
+  const pageTitle = `${project.name} · 灵动工作室产品集`;
+  const pageDesc = project.description;
+  const ogImage = project.images?.[0]?.src ? `${SITE_URL}${project.images[0].src}` : undefined;
+
+  const jsonLd: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: project.name,
+    description: project.description,
+    applicationCategory: getApplicationCategory(project.category),
+    url: pageUrl,
+    screenshot: project.images?.map((img) => `${SITE_URL}${img.src}`) ?? [],
+  };
+
+  if (project.category === "桌面应用") {
+    jsonLd.operatingSystem = "macOS, Windows";
+  }
+
+  if (project.badges?.some((b) => b === "免费软件" || b === "开源")) {
+    jsonLd.offers = {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "CNY",
+    };
+  }
+
   return (
     <>
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDesc} />
+        <link rel="canonical" href={pageUrl} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDesc} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={pageUrl} />
+        {ogImage && <meta property="og:image" content={ogImage} />}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDesc} />
+        {ogImage && <meta name="twitter:image" content={ogImage} />}
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      </Helmet>
+
       <div className="flex flex-col min-h-[calc(100svh-56px)]">
         <div className="max-w-6xl mx-auto px-6 py-8 w-full flex-1">
           <Link

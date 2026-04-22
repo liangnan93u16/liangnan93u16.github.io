@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -25,7 +25,7 @@ export default function App() {
   }, [theme]);
 
   return (
-    <HashRouter>
+    <BrowserRouter>
       <div className="min-h-svh flex flex-col bg-white dark:bg-[#0a0a0a] transition-colors duration-300">
         <Header />
         <main className="flex-1">
@@ -36,6 +36,6 @@ export default function App() {
         </main>
         <Footer />
       </div>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
