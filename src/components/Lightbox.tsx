@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface LightboxImage {
@@ -14,6 +14,9 @@ interface LightboxProps {
 }
 
 export default function Lightbox({ images, index, onClose, onChange }: LightboxProps) {
+  const propsRef = useRef({ images, index, onClose, onChange });
+  propsRef.current = { images, index, onClose, onChange };
+
   const handlePrev = useCallback(() => {
     onChange(Math.max(0, index - 1));
   }, [index, onChange]);
@@ -24,13 +27,20 @@ export default function Lightbox({ images, index, onClose, onChange }: LightboxP
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
+      const { images, index, onClose, onChange } = propsRef.current;
       if (e.key === "Escape") onClose();
-      if (e.key === "ArrowLeft") handlePrev();
-      if (e.key === "ArrowRight") handleNext();
+      if (e.key === "ArrowLeft") onChange(Math.max(0, index - 1));
+      if (e.key === "ArrowRight") onChange(Math.min(images.length - 1, index + 1));
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [onClose, handlePrev, handleNext]);
+  }, []);
+
+  useEffect(() => {
+    const original = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = original; };
+  }, []);
 
   const image = images[index];
   if (!image) return null;
@@ -42,7 +52,10 @@ export default function Lightbox({ images, index, onClose, onChange }: LightboxP
     >
       <button
         className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors p-2"
-        onClick={onClose}
+        onClick={(e) => {
+          e.stopPropagation();
+          onClose();
+        }}
       >
         <X className="w-6 h-6" />
       </button>
