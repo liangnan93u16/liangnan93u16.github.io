@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useMemo } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface LightboxImage {
@@ -35,20 +35,23 @@ export default function Lightbox({ images, index, onClose, onChange }: LightboxP
   const image = images[index];
   if (!image) return null;
 
-  const navButtons = [
-    {
-      show: index > 0,
-      position: "left-4" as const,
-      Icon: ChevronLeft,
-      onClick: handlePrev,
-    },
-    {
-      show: index < images.length - 1,
-      position: "right-4" as const,
-      Icon: ChevronRight,
-      onClick: handleNext,
-    },
-  ];
+  const navButtons = useMemo(
+    () => [
+      {
+        show: index > 0,
+        position: "left-4" as const,
+        Icon: ChevronLeft,
+        onClick: handlePrev,
+      },
+      {
+        show: index < images.length - 1,
+        position: "right-4" as const,
+        Icon: ChevronRight,
+        onClick: handleNext,
+      },
+    ],
+    [index, images.length, handlePrev, handleNext]
+  );
 
   return (
     <div
