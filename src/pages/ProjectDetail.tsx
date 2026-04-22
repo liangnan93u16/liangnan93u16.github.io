@@ -1,8 +1,9 @@
 import { useParams, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { ArrowLeft, Code2, ExternalLink, Download, CheckCircle2, Zap, Info, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
+import { ArrowLeft, Code2, ExternalLink, Download, CheckCircle2, Zap, Info } from "lucide-react";
 import { getProjectById, statusConfig } from "../data/projects";
 import StatusBadge from "../components/StatusBadge";
+import Lightbox from "../components/Lightbox";
 
 function ProjectLink({
   href,
@@ -32,23 +33,6 @@ export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
   const project = getProjectById(id || "");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-
-  useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") setLightboxIndex(null);
-      if (lightboxIndex === null) return;
-      if (e.key === "ArrowLeft" && project?.images) {
-        setLightboxIndex((prev) => (prev === null ? null : Math.max(0, prev - 1)));
-      }
-      if (e.key === "ArrowRight" && project?.images) {
-        setLightboxIndex((prev) =>
-          prev === null ? null : Math.min(project.images!.length - 1, prev + 1)
-        );
-      }
-    }
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [lightboxIndex, project?.images]);
 
   if (!project) {
     return (
@@ -218,48 +202,12 @@ export default function ProjectDetail() {
 
       {/* Lightbox */}
       {lightboxIndex !== null && project.images && (
-        <div
-          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center"
-          onClick={() => setLightboxIndex(null)}
-        >
-          <button
-            className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors p-2"
-            onClick={() => setLightboxIndex(null)}
-          >
-            <X className="w-6 h-6" />
-          </button>
-
-          {lightboxIndex > 0 && (
-            <button
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors p-2"
-              onClick={(e) => {
-                e.stopPropagation();
-                setLightboxIndex(lightboxIndex - 1);
-              }}
-            >
-              <ChevronLeft className="w-8 h-8" />
-            </button>
-          )}
-
-          {lightboxIndex < project.images.length - 1 && (
-            <button
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors p-2"
-              onClick={(e) => {
-                e.stopPropagation();
-                setLightboxIndex(lightboxIndex + 1);
-              }}
-            >
-              <ChevronRight className="w-8 h-8" />
-            </button>
-          )}
-
-          <img
-            src={project.images[lightboxIndex].src}
-            alt={project.images[lightboxIndex].title}
-            className="max-w-[90vw] max-h-[85vh] rounded-lg object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
+        <Lightbox
+          images={project.images}
+          index={lightboxIndex}
+          onClose={() => setLightboxIndex(null)}
+          onChange={setLightboxIndex}
+        />
       )}
     </>
   );
