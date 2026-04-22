@@ -60,6 +60,68 @@ export const projects: Project[] = [
       "画框和背景可视化定制",
       "Google 一键登录",
     ],
+    images: [
+      {
+        src: "/images/art-gallery-ecommerce/1.webp",
+        title: "网站首页",
+        description: "精美的首页设计，展示手工艺术复制品与定制艺术服务，配有梵高《星夜》等经典作品展示，传达专业艺术电商的品牌形象。",
+      },
+      {
+        src: "/images/art-gallery-ecommerce/2.webp",
+        title: "四大核心服务",
+        description: "清晰呈现四大服务板块：艺术品复制品、定制肖像、照片风格化艺术作品、角色扮演艺术，让用户快速找到所需服务。",
+      },
+      {
+        src: "/images/art-gallery-ecommerce/3.webp",
+        title: "畅销复制品展示",
+        description: "展示销量最高的500幅艺术复制品，涵盖马蒂斯、莫奈等大师作品，配有轮播浏览和查看全部作品入口。",
+      },
+      {
+        src: "/images/art-gallery-ecommerce/4.webp",
+        title: "肖像类别选择",
+        description: "丰富的肖像定制类别，包括婚礼、情侣、个人、儿童、家庭、宠物等，满足不同场景的照片转艺术需求。",
+      },
+      {
+        src: "/images/art-gallery-ecommerce/5.webp",
+        title: "风格化艺术作品",
+        description: "多种艺术风格转换选项：梵高风、油画风、漫画风、动漫风、波普艺术风等，将照片转化为独特艺术作品。",
+      },
+      {
+        src: "/images/art-gallery-ecommerce/6.webp",
+        title: "角色扮演艺术",
+        description: "创意十足的角色扮演定制服务，用户可选择皇家文艺复兴、电影电视、职业等多种主题，让自己成为画中主角。",
+      },
+      {
+        src: "/images/art-gallery-ecommerce/9.webp",
+        title: "商品详情与购物车",
+        description: "完整的商品详情页，支持尺寸选择、价格展示、颜色选择、加入购物车等功能，购物流程清晰流畅。",
+      },
+      {
+        src: "/images/art-gallery-ecommerce/10.webp",
+        title: "艺术家与品质保证",
+        description: "展示资深艺术家团队、最高品质材料、严格质量控制和始终手绘风格的四大核心优势，建立用户信任。",
+      },
+      {
+        src: "/images/art-gallery-ecommerce/14.webp",
+        title: "绘画媒介选择",
+        description: "支持多种绘画媒介选择：油画、亚克力、炭笔、铅笔、粉彩等，用户可根据喜好定制，右侧实时显示订单摘要。",
+      },
+      {
+        src: "/images/art-gallery-ecommerce/15.webp",
+        title: "背景与签名定制",
+        description: "灵活的背景选择方案：让艺术家决定、预设实心背景、保留原始照片背景、上传自定义背景，还可添加艺术家签名和绘画过程视频。",
+      },
+      {
+        src: "/images/art-gallery-ecommerce/19.webp",
+        title: "宠物角色扮演服装",
+        description: "为宠物提供丰富的角色扮演服装选择，包括维京人、绿箭侠、美国队长、金刚狼等趣味造型，让爱宠也能成为艺术主角。",
+      },
+      {
+        src: "/images/art-gallery-ecommerce/22.webp",
+        title: "人物服装选择",
+        description: "人物角色扮演的精美服装选项，从王后女王到玛丽女王、皇家公爵夫人等历史主题服装，打造独一无二的艺术肖像。",
+      },
+    ],
     status: "delivered",
     category: "客户定制",
   },
