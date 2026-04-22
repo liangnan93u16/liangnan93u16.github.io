@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Code2, ExternalLink, Download, CheckCircle2 } from "lucide-react";
-import { getProjectById } from "../data/projects";
+import { getProjectById, statusConfig } from "../data/projects";
+import StatusBadge from "../components/StatusBadge";
 
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
@@ -22,12 +23,7 @@ export default function ProjectDetail() {
     );
   }
 
-  const statusText =
-    project.status === "completed"
-      ? "已完成"
-      : project.status === "in-progress"
-        ? "开发中"
-        : "规划中";
+  const status = statusConfig[project.status];
 
   return (
     <div className="flex flex-col min-h-[calc(100svh-56px)]">
@@ -47,17 +43,7 @@ export default function ProjectDetail() {
             <span className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full border border-gray-200">
               {project.category}
             </span>
-            <span
-              className={`text-xs px-2.5 py-1 rounded-full border ${
-                project.status === "completed"
-                  ? "bg-emerald-50 text-emerald-700 border-emerald-200"
-                  : project.status === "in-progress"
-                    ? "bg-amber-50 text-amber-700 border-amber-200"
-                    : "bg-gray-100 text-gray-600 border-gray-200"
-              }`}
-            >
-              {statusText}
-            </span>
+            <StatusBadge status={project.status} />
           </div>
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
             {project.name}
@@ -165,7 +151,7 @@ export default function ProjectDetail() {
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-gray-500">状态</span>
-                  <span className="font-medium text-gray-900">{statusText}</span>
+                  <span className="font-medium text-gray-900">{status.text}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-500">分类</span>

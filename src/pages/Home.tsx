@@ -1,20 +1,14 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, ExternalLink, Heart, Layers, Sparkles } from "lucide-react";
 import { projects } from "../data/projects";
+import StatusBadge from "../components/StatusBadge";
 
-function StatusBadge({ status }: { status: string }) {
-  const map: Record<string, { text: string; cls: string }> = {
-    completed: { text: "已完成", cls: "bg-emerald-50 text-emerald-700 border-emerald-200" },
-    "in-progress": { text: "开发中", cls: "bg-amber-50 text-amber-700 border-amber-200" },
-    planned: { text: "规划中", cls: "bg-gray-100 text-gray-600 border-gray-200" },
-  };
-  const s = map[status] || map.planned;
-  return (
-    <span className={`text-xs px-2 py-0.5 rounded-full border ${s.cls}`}>
-      {s.text}
-    </span>
-  );
-}
+const stats = [
+  { icon: Layers, label: "项目总数", value: () => String(projects.length) },
+  { icon: Heart, label: "已完成", value: () => String(projects.filter((p) => p.status === "completed").length) },
+  { icon: Sparkles, label: "开发中", value: () => String(projects.filter((p) => p.status === "in-progress").length) },
+  { icon: ExternalLink, label: "开源项目", value: () => String(projects.filter((p) => p.githubUrl).length) },
+];
 
 export default function Home() {
   return (
@@ -40,15 +34,10 @@ export default function Home() {
       <section className="py-12 border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-            {[
-              { icon: Layers, label: "项目总数", value: String(projects.length) },
-              { icon: Heart, label: "已完成", value: String(projects.filter((p) => p.status === "completed").length) },
-              { icon: Sparkles, label: "开发中", value: String(projects.filter((p) => p.status === "in-progress").length) },
-              { icon: ExternalLink, label: "开源项目", value: String(projects.filter((p) => p.githubUrl).length) },
-            ].map((stat) => (
+            {stats.map((stat) => (
               <div key={stat.label} className="text-center">
                 <stat.icon className="w-5 h-5 text-indigo-500 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
+                <div className="text-2xl font-bold text-gray-900">{stat.value()}</div>
                 <div className="text-sm text-gray-500">{stat.label}</div>
               </div>
             ))}
