@@ -108,6 +108,11 @@ export default function ProjectDetail() {
                 下载安装
               </ProjectLink>
             )}
+            {project.downloads?.map(({ label, url }) => (
+              <ProjectLink key={url} href={url} icon={Download}>
+                {label}
+              </ProjectLink>
+            ))}
           </div>
 
           <div className="space-y-10">

@@ -104,6 +104,18 @@ export default function Home() {
                           <ExternalLink className="w-3.5 h-3.5" />
                         </a>
                       )}
+                      {project.downloads?.map(({ label, url }) => (
+                        <a
+                          key={url}
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-sm text-[#666] hover:text-[#171717] transition-colors dark:text-[#a3a3a3] dark:hover:text-[#f5f5f5]"
+                        >
+                          {label}
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      ))}
                       <div className="flex flex-wrap gap-2">
                         {project.highlights.slice(0, 3).map(({ text }) => (
                           <span

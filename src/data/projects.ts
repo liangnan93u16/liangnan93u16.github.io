@@ -39,6 +39,7 @@ export interface Project {
   githubUrl?: string;
   demoUrl?: string;
   downloadUrl?: string;
+  downloads?: { label: string; url: string }[];
   status: ProjectStatus;
   category: string;
   hideStatusBadge?: boolean;
@@ -290,6 +291,11 @@ export const projects: Project[] = [
         title: "详细的分析报告",
         description: "不仅给出分数，更提供综合结果解释和关键发现，帮助你深入理解自己的恋爱心理特点，促进更健康的亲密关系。",
       },
+    ],
+    downloads: [
+      { label: "Windows (x64)", url: "https://github.com/liangnan93u16/LoveCalculatorApp/releases/download/v1.0.0/RPI._1.0.0_x64-setup.exe" },
+      { label: "macOS (Apple Silicon)", url: "https://github.com/liangnan93u16/LoveCalculatorApp/releases/download/v1.0.0/RPI._1.0.0_aarch64.dmg" },
+      { label: "macOS (Intel)", url: "https://github.com/liangnan93u16/LoveCalculatorApp/releases/download/v1.0.0/RPI._1.0.0_x64.dmg" },
     ],
     badges: ["开源", "免费软件"],
     status: "completed",
