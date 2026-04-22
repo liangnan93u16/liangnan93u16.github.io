@@ -23,7 +23,7 @@ export default function Header() {
   }, [location.pathname]);
 
   return (
-    <header className="border-b border-[#ebebeb] bg-white/80 backdrop-blur sticky top-0 z-50">
+    <header className="border-b border-black/5 bg-white/80 backdrop-blur-md sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 text-[#171717] hover:text-black transition-colors">
           <Code2 className="w-5 h-5" />

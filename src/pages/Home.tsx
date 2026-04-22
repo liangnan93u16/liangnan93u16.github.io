@@ -1,39 +1,38 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ExternalLink, Layers } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import { projects, onlineStatuses } from "../data/projects";
 import StatusBadge from "../components/StatusBadge";
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-[calc(100svh-56px)]">
-      {/* Compact Hero + Stats */}
-      <section className="pt-10 pb-6 sm:pt-14 sm:pb-8">
+      {/* Hero */}
+      <section className="pt-16 pb-10 sm:pt-24 sm:pb-14">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-6">
-            <h1 className="text-3xl sm:text-4xl lg:text-[40px] font-semibold text-[#171717] tracking-[-2px] mb-3 leading-[1.1]">
+          <div className="text-center mb-10">
+            <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-semibold text-[#171717] tracking-[-2.5px] mb-5 leading-[1.08]">
               实用的工具，解决真实问题
             </h1>
-            <p className="text-base sm:text-lg text-[#666] max-w-xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl text-[#666] max-w-2xl mx-auto leading-relaxed">
               每一款产品都源于真实需求，致力于提供简单好用的解决方案
             </p>
           </div>
 
-          {/* Inline stats */}
-          <div className="flex items-center justify-center gap-6 sm:gap-10 text-sm">
-            <div className="flex items-center gap-1.5">
-              <Layers className="w-4 h-4 text-[#171717]" />
-              <span className="font-semibold text-[#171717]">{projects.length}</span>
-              <span className="text-[#666]">款产品</span>
+          {/* Stats */}
+          <div className="flex items-center justify-center gap-8 sm:gap-14">
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl font-semibold text-[#171717] tracking-tight">{projects.length}</div>
+              <div className="text-sm text-[#666] mt-1">款产品</div>
             </div>
-            <div className="w-px h-4 bg-[#ebebeb]" />
-            <div className="flex items-center gap-1.5">
-              <span className="font-semibold text-[#171717]">{projects.filter((p) => onlineStatuses.includes(p.status)).length}</span>
-              <span className="text-[#666]">已上线</span>
+            <div className="w-px h-10 bg-[#ebebeb]" />
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl font-semibold text-[#171717] tracking-tight">{projects.filter((p) => onlineStatuses.includes(p.status)).length}</div>
+              <div className="text-sm text-[#666] mt-1">已上线</div>
             </div>
-            <div className="w-px h-4 bg-[#ebebeb] hidden sm:block" />
-            <div className="hidden sm:flex items-center gap-1.5">
-              <span className="font-semibold text-[#171717]">2+</span>
-              <span className="text-[#666]">平台</span>
+            <div className="w-px h-10 bg-[#ebebeb] hidden sm:block" />
+            <div className="text-center hidden sm:block">
+              <div className="text-2xl sm:text-3xl font-semibold text-[#171717] tracking-tight">2+</div>
+              <div className="text-sm text-[#666] mt-1">平台</div>
             </div>
           </div>
         </div>
