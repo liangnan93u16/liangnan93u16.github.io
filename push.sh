@@ -26,6 +26,14 @@ if [ "$HAS_CHANGES" = true ]; then
   git status --short
   echo ""
 
+  echo "=== 正在本地编译 ==="
+  if ! npm run build; then
+    echo ""
+    echo "❌ 编译失败，提交已取消"
+    exit 1
+  fi
+  echo ""
+
   echo "=== 正在提交 ==="
   git add -A
   git commit -m "${1:-update}"

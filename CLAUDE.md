@@ -77,6 +77,7 @@ src/
    cwebp input.png -o public/images/{project-id}/1.webp -q 85
    ```
    Always use `webp` for images — never commit PNG, JPEG, or other formats.
+5. **Compressed images must not exceed 200KB.** If a webp is still over 200KB, lower the quality (`-q 70`, `-q 60`, etc.) and re-compress until it fits.
 
 ## Deployment
 

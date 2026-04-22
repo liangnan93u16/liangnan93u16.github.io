@@ -53,7 +53,7 @@ export default function ProjectDetail() {
   return (
     <>
       <div className="flex flex-col min-h-[calc(100svh-56px)]">
-        <div className="max-w-3xl mx-auto px-6 py-8 w-full flex-1">
+        <div className="max-w-6xl mx-auto px-6 py-8 w-full flex-1">
           {/* Breadcrumb */}
           <Link
             to="/"

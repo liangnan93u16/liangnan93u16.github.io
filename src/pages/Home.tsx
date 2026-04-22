@@ -63,7 +63,7 @@ export default function Home() {
                         >
                           {project.name}
                         </Link>
-                      <StatusBadge status={project.status} />
+                      {project.id !== "rpi-love-calculator" && <StatusBadge status={project.status} />}
                     </div>
                     <p className="text-[#666] text-sm leading-relaxed">{project.tagline}</p>
                   </div>
