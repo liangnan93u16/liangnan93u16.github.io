@@ -55,9 +55,12 @@ export default function Home() {
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-3">
                   <div>
                     <div className="flex items-center gap-2.5 mb-1.5">
-                      <h3 className="text-lg font-semibold text-[#171717] group-hover:text-black transition-colors tracking-tight">
+                      <Link
+                        to={`/project/${project.id}`}
+                        className="text-lg font-semibold text-[#171717] group-hover:text-black transition-colors tracking-tight hover:underline"
+                      >
                         {project.name}
-                      </h3>
+                      </Link>
                       <StatusBadge status={project.status} />
                     </div>
                     <p className="text-[#666] text-sm leading-relaxed">{project.tagline}</p>
