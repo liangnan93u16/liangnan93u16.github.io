@@ -47,20 +47,22 @@ export default function Home() {
       <section className="py-6 flex-1">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid gap-4">
-            {projects.map((project) => (
-              <div
-                key={project.id}
-                className="group bg-white border border-[#ebebeb] rounded-lg p-5 sm:p-6 hover:border-[#171717] hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)] transition-all duration-200"
-              >
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-3">
-                  <div>
-                    <div className="flex items-center gap-2.5 mb-1.5">
-                      <Link
-                        to={`/project/${project.id}`}
-                        className="text-lg font-semibold text-[#171717] group-hover:text-black transition-colors tracking-tight hover:underline"
-                      >
-                        {project.name}
-                      </Link>
+            {projects.map((project) => {
+              const projectUrl = `/project/${project.id}`;
+              return (
+                <div
+                  key={project.id}
+                  className="group bg-white border border-[#ebebeb] rounded-lg p-5 sm:p-6 hover:border-[#171717] hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)] transition-all duration-200"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-3">
+                    <div>
+                      <div className="flex items-center gap-2.5 mb-1.5">
+                        <Link
+                          to={projectUrl}
+                          className="text-lg font-semibold text-[#171717] group-hover:text-black transition-colors tracking-tight hover:underline"
+                        >
+                          {project.name}
+                        </Link>
                       <StatusBadge status={project.status} />
                     </div>
                     <p className="text-[#666] text-sm leading-relaxed">{project.tagline}</p>
@@ -92,7 +94,7 @@ export default function Home() {
 
                 <div className="flex items-center gap-4">
                   <Link
-                    to={`/project/${project.id}`}
+                    to={projectUrl}
                     className="inline-flex items-center gap-1.5 text-sm font-medium text-[#171717] hover:text-black transition-colors"
                   >
                     了解更多
@@ -111,7 +113,8 @@ export default function Home() {
                   )}
                 </div>
               </div>
-            ))}
+            );
+          })}
           </div>
         </div>
       </section>
