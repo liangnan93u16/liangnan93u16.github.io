@@ -3,13 +3,37 @@ import { ArrowLeft, Code2, ExternalLink, Download, CheckCircle2, Zap, Info } fro
 import { getProjectById, statusConfig } from "../data/projects";
 import StatusBadge from "../components/StatusBadge";
 
+function ProjectLink({
+  href,
+  icon: Icon,
+  children,
+  variant = "secondary",
+}: {
+  href: string;
+  icon: React.ComponentType<{ className?: string }>;
+  children: React.ReactNode;
+  variant?: "primary" | "secondary";
+}) {
+  const base = "inline-flex items-center gap-2 px-5 py-2.5 rounded-md text-sm font-medium transition-colors";
+  const cls =
+    variant === "primary"
+      ? `${base} bg-[#171717] text-white hover:bg-black`
+      : `${base} bg-white text-[#171717] border border-[#ebebeb] hover:border-[#171717]`;
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>
+      <Icon className="w-4 h-4" />
+      {children}
+    </a>
+  );
+}
+
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
   const project = getProjectById(id || "");
 
   if (!project) {
     return (
-      <div className="max-w-6xl mx-auto px-6 py-20 text-center">
+      <div className="max-w-3xl mx-auto px-6 py-20 text-center">
         <h1 className="text-2xl font-semibold text-[#171717] mb-4">项目未找到</h1>
         <p className="text-[#666] mb-6">该项目不存在或已被移除。</p>
         <Link
@@ -23,7 +47,6 @@ export default function ProjectDetail() {
     );
   }
 
-  const status = statusConfig[project.status];
 
   return (
     <div className="flex flex-col min-h-[calc(100svh-56px)]">
@@ -56,35 +79,19 @@ export default function ProjectDetail() {
         {/* Links */}
         <div className="flex flex-wrap gap-3 mb-12">
           {project.githubUrl && (
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#171717] text-white px-5 py-2.5 rounded-md text-sm font-medium hover:bg-black transition-colors"
-            >
-              <Code2 className="w-4 h-4" />
+            <ProjectLink href={project.githubUrl} icon={Code2} variant="primary">
               GitHub 仓库
-            </a>
+            </ProjectLink>
           )}
           {project.demoUrl && (
-            <a
-              href={project.demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-white text-[#171717] border border-[#ebebeb] px-5 py-2.5 rounded-md text-sm font-medium hover:border-[#171717] transition-colors"
-            >
-              <ExternalLink className="w-4 h-4" />
+            <ProjectLink href={project.demoUrl} icon={ExternalLink}>
               在线演示
-            </a>
+            </ProjectLink>
           )}
           {project.downloadUrl && (
-            <a
-              href={project.downloadUrl}
-              className="inline-flex items-center gap-2 bg-white text-[#171717] border border-[#ebebeb] px-5 py-2.5 rounded-md text-sm font-medium hover:border-[#171717] transition-colors"
-            >
-              <Download className="w-4 h-4" />
+            <ProjectLink href={project.downloadUrl} icon={Download}>
               下载安装
-            </a>
+            </ProjectLink>
           )}
         </div>
 
@@ -143,7 +150,7 @@ export default function ProjectDetail() {
               <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm">
                 <div className="flex items-center gap-2">
                   <span className="text-[#808080]">状态</span>
-                  <span className="font-medium text-[#171717]">{status.text}</span>
+                  <span className="font-medium text-[#171717]">{statusConfig[project.status].text}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-[#808080]">分类</span>
