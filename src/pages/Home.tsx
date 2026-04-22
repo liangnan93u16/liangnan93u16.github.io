@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, ExternalLink, Layers, Sparkles } from "lucide-react";
-import { projects } from "../data/projects";
+import { projects, onlineStatuses } from "../data/projects";
 import StatusBadge from "../components/StatusBadge";
 
 export default function Home() {
@@ -31,7 +31,7 @@ export default function Home() {
             </div>
             <div className="w-px h-4 bg-[#ebebeb]" />
             <div className="flex items-center gap-1.5">
-              <span className="font-semibold text-[#171717]">{projects.filter((p) => p.status === "completed" || p.status === "delivered").length}</span>
+              <span className="font-semibold text-[#171717]">{projects.filter((p) => onlineStatuses.includes(p.status)).length}</span>
               <span className="text-[#666]">已上线</span>
             </div>
             <div className="w-px h-4 bg-[#ebebeb] hidden sm:block" />

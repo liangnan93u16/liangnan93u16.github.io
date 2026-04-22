@@ -16,12 +16,16 @@ export interface Project {
   category: string;
 }
 
+const onlineCls = "bg-[#ebf5ff] text-[#0a72ef] border-[#0a72ef]/20";
+
 export const statusConfig: Record<ProjectStatus, { text: string; cls: string }> = {
-  completed: { text: "已完成", cls: "bg-[#ebf5ff] text-[#0a72ef] border-[#0a72ef]/20" },
-  delivered: { text: "已交付", cls: "bg-[#ebf5ff] text-[#0a72ef] border-[#0a72ef]/20" },
+  completed: { text: "已完成", cls: onlineCls },
+  delivered: { text: "已交付", cls: onlineCls },
   "in-progress": { text: "开发中", cls: "bg-[#fafafa] text-[#666] border-[#ebebeb]" },
   planned: { text: "规划中", cls: "bg-[#fafafa] text-[#808080] border-[#ebebeb]" },
 };
+
+export const onlineStatuses: ProjectStatus[] = ["completed", "delivered"];
 
 export const projects: Project[] = [
   {
