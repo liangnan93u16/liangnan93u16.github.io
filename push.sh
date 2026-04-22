@@ -17,21 +17,21 @@ if [ "$HAS_CHANGES" = false ] && [ "$UNPUSHED" = "0" ]; then
   exit 0
 fi
 
-# 提交工作区变更
+# 提交工作区变更（需要参数）
 if [ "$HAS_CHANGES" = true ]; then
-  echo "=== 待提交的变更 ==="
-  git status --short
-  echo ""
-
   if [ -z "$1" ]; then
+    echo "工作区有变更，需要提供提交说明"
     echo "用法: ./push.sh '提交说明'"
     exit 1
   fi
 
-  MSG="$1"
+  echo "=== 待提交的变更 ==="
+  git status --short
+  echo ""
+
   echo "=== 正在提交 ==="
   git add -A
-  git commit -m "$MSG"
+  git commit -m "$1"
   echo ""
 fi
 
