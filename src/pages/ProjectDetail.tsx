@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Code2, ExternalLink, Download, CheckCircle2, Zap } from "lucide-react";
+import { ArrowLeft, Code2, ExternalLink, Download, CheckCircle2, Zap, Info } from "lucide-react";
 import { getProjectById, statusConfig } from "../data/projects";
 import StatusBadge from "../components/StatusBadge";
 
@@ -27,7 +27,7 @@ export default function ProjectDetail() {
 
   return (
     <div className="flex flex-col min-h-[calc(100svh-56px)]">
-      <div className="max-w-6xl mx-auto px-6 py-8 w-full flex-1">
+      <div className="max-w-3xl mx-auto px-6 py-8 w-full flex-1">
         {/* Breadcrumb */}
         <Link
           to="/"
@@ -48,7 +48,7 @@ export default function ProjectDetail() {
           <h1 className="text-3xl sm:text-4xl font-semibold text-[#171717] mb-3 tracking-tight">
             {project.name}
           </h1>
-          <p className="text-lg text-[#666] leading-relaxed max-w-3xl">
+          <p className="text-lg text-[#666] leading-relaxed">
             {project.tagline}
           </p>
         </div>
@@ -88,88 +88,76 @@ export default function ProjectDetail() {
           )}
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-10">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-10">
-            {/* Description */}
-            <section>
-              <h2 className="text-xl font-semibold text-[#171717] mb-4 tracking-tight">项目介绍</h2>
-              <p className="text-[#666] leading-relaxed whitespace-pre-line">
-                {project.description}
-              </p>
-            </section>
+        <div className="space-y-10">
+          {/* Description */}
+          <section>
+            <h2 className="text-xl font-semibold text-[#171717] mb-4 tracking-tight">项目介绍</h2>
+            <p className="text-[#666] leading-relaxed whitespace-pre-line">
+              {project.description}
+            </p>
+          </section>
 
-            {/* Highlights — 重点突出 */}
-            <section>
-              <div className="flex items-center gap-2 mb-5">
-                <Zap className="w-5 h-5 text-[#0a72ef]" />
-                <h2 className="text-xl font-semibold text-[#171717] tracking-tight">核心亮点</h2>
-              </div>
-              <div className="grid sm:grid-cols-2 gap-3">
-                {project.highlights.map((h, i) => (
-                  <div
-                    key={i}
-                    className="bg-white border border-[#ebebeb] rounded-lg p-5 hover:border-[#171717] hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] transition-all duration-200"
-                  >
-                    <div className="flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-md bg-[#ebf5ff] flex items-center justify-center shrink-0 mt-0.5">
-                        <span className="text-sm font-semibold text-[#0a72ef]">{i + 1}</span>
-                      </div>
-                      <p className="text-[#171717] text-sm font-medium leading-relaxed">{h}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* Features */}
-            <section>
-              <h2 className="text-xl font-semibold text-[#171717] mb-4 tracking-tight">功能特性</h2>
-              <ul className="space-y-3">
-                {project.features.map((feature, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-[#0a72ef] mt-0.5 shrink-0" />
-                    <span className="text-[#666] leading-relaxed">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            <div className="bg-[#fafafa] border border-[#ebebeb] rounded-lg p-6">
-              <h3 className="font-semibold text-[#171717] mb-4 tracking-tight">技术栈</h3>
-              <div className="space-y-3">
-                {project.techStack.map((tech) => (
-                  <div key={tech.category}>
-                    <div className="text-xs text-[#808080] mb-1">{tech.category}</div>
-                    <div className="text-sm font-medium text-[#171717]">{tech.items}</div>
-                  </div>
-                ))}
-              </div>
+          {/* Highlights */}
+          <section>
+            <div className="flex items-center gap-2 mb-5">
+              <Zap className="w-5 h-5 text-[#0a72ef]" />
+              <h2 className="text-xl font-semibold text-[#171717] tracking-tight">核心亮点</h2>
             </div>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {project.highlights.map((h, i) => (
+                <div
+                  key={i}
+                  className="bg-white border border-[#ebebeb] rounded-lg p-5 hover:border-[#171717] hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] transition-all duration-200"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-md bg-[#ebf5ff] flex items-center justify-center shrink-0 mt-0.5">
+                      <span className="text-sm font-semibold text-[#0a72ef]">{i + 1}</span>
+                    </div>
+                    <p className="text-[#171717] text-sm font-medium leading-relaxed">{h}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
 
-            <div className="bg-[#fafafa] border border-[#ebebeb] rounded-lg p-6">
-              <h3 className="font-semibold text-[#171717] mb-3 tracking-tight">项目信息</h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
+          {/* Features */}
+          <section>
+            <h2 className="text-xl font-semibold text-[#171717] mb-4 tracking-tight">功能特性</h2>
+            <ul className="space-y-3">
+              {project.features.map((feature, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#0a72ef] mt-0.5 shrink-0" />
+                  <span className="text-[#666] leading-relaxed">{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          {/* Project Info */}
+          <section>
+            <div className="flex items-center gap-2 mb-4">
+              <Info className="w-5 h-5 text-[#0a72ef]" />
+              <h2 className="text-xl font-semibold text-[#171717] tracking-tight">项目信息</h2>
+            </div>
+            <div className="bg-[#fafafa] border border-[#ebebeb] rounded-lg p-5">
+              <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm">
+                <div className="flex items-center gap-2">
                   <span className="text-[#808080]">状态</span>
                   <span className="font-medium text-[#171717]">{status.text}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex items-center gap-2">
                   <span className="text-[#808080]">分类</span>
                   <span className="font-medium text-[#171717]">{project.category}</span>
                 </div>
                 {project.githubUrl && (
-                  <div className="flex justify-between">
+                  <div className="flex items-center gap-2">
                     <span className="text-[#808080]">开源</span>
                     <span className="font-medium text-[#0a72ef]">是</span>
                   </div>
                 )}
               </div>
             </div>
-          </div>
+          </section>
         </div>
       </div>
     </div>
