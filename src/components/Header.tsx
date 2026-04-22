@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Code2 } from "lucide-react";
 import { getProjectById } from "../data/projects";
+import ThemeToggle from "./ThemeToggle";
 
 const DEFAULT_GITHUB_URL = "https://github.com/liangnan93u16";
 const PROJECT_GITHUB_URLS: Record<string, string> = {
@@ -24,9 +25,9 @@ export default function Header() {
   }, [location.pathname]);
 
   return (
-    <header className="border-b border-black/5 bg-white/80 backdrop-blur-md sticky top-0 z-50">
+    <header className="border-b border-black/5 bg-white/80 backdrop-blur-md sticky top-0 z-50 dark:border-white/10 dark:bg-[#0a0a0a]/80 transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 text-[#171717] hover:text-black transition-colors">
+        <Link to="/" className="flex items-center gap-2 text-[#171717] hover:text-black transition-colors dark:text-[#f5f5f5] dark:hover:text-white">
           <Code2 className="w-5 h-5" />
           <span className="font-semibold text-lg tracking-tight">灵动工作室</span>
         </Link>
@@ -35,7 +36,7 @@ export default function Header() {
             href="https://www.xiaohongshu.com/user/profile/62b01cca00000000190288cc"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#666] hover:text-[#171717] transition-colors"
+            className="text-[#666] hover:text-[#171717] transition-colors dark:text-[#a3a3a3] dark:hover:text-[#f5f5f5]"
           >
             小红书
           </a>
@@ -44,11 +45,12 @@ export default function Header() {
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#666] hover:text-[#171717] transition-colors"
+              className="text-[#666] hover:text-[#171717] transition-colors dark:text-[#a3a3a3] dark:hover:text-[#f5f5f5]"
             >
               GitHub
             </a>
           )}
+          <ThemeToggle />
         </nav>
       </div>
     </header>

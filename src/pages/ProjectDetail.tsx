@@ -5,23 +5,6 @@ import {
   Code2,
   ExternalLink,
   Download,
-  Globe,
-  Paintbrush,
-  CreditCard,
-  Package,
-  Image as ImageIcon,
-  LogIn,
-  FileText,
-  Radio,
-  MessageSquare,
-  UserCircle,
-  CalendarCheck,
-  Brain,
-  ListChecks,
-  Users,
-  WifiOff,
-  CircleDot,
-  Monitor,
 } from "lucide-react";
 import { getProjectById, badgeConfig, badgeDefaultCls } from "../data/projects";
 import StatusBadge from "../components/StatusBadge";
@@ -50,27 +33,6 @@ function ProjectLink({
     </a>
   );
 }
-
-const highlightIcons: Record<string, React.ComponentType<{ className?: string }>> = {
-  "五种语言支持，面向全球市场": Globe,
-  "从照片到肖像画的完整定制流程": Paintbrush,
-  "Stripe + PayPal 双支付通道": CreditCard,
-  "完整的后台订单和内容管理": Package,
-  "画框和背景可视化定制": ImageIcon,
-  "Google 一键登录": LogIn,
-  "专家解盘与定位解析文章系统": FileText,
-  "付费内参订阅与订单管理": CreditCard,
-  "实时直播室与互动评论": Radio,
-  "完整的私信系统": MessageSquare,
-  "个人中心订阅管理": UserCircle,
-  "签到排名系统": CalendarCheck,
-  "基于心理学量表的科学评估体系": Brain,
-  "40 道专业题目，多维度深度分析": ListChecks,
-  "自测 / 代测双模式，覆盖不同场景": Users,
-  "完全离线运行，数据零上传": WifiOff,
-  "雷达图可视化，四维度直观呈现": CircleDot,
-  "跨平台支持 macOS & Windows": Monitor,
-};
 
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
@@ -188,20 +150,17 @@ export default function ProjectDetail() {
             <section>
               <h2 className="text-2xl font-semibold text-[#171717] mb-6 tracking-tight">核心亮点</h2>
               <div className="grid sm:grid-cols-2 gap-4">
-                {project.highlights.map((h, i) => {
-                  const Icon = highlightIcons[h];
-                  return (
-                    <div
-                      key={i}
-                      className="bg-white border border-[#ebebeb] rounded-xl p-6 hover:border-[#171717] hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] transition-all duration-200"
-                    >
-                      <p className="text-[#171717] font-medium leading-relaxed flex items-center gap-2">
-                        {Icon && <Icon className="w-4 h-4 text-[#0a72ef] shrink-0" />}
-                        {h}
-                      </p>
+                {project.highlights.map(({ text, icon: Icon }) => (
+                  <div
+                    key={text}
+                    className="bg-white border border-[#ebebeb] rounded-xl p-6 hover:border-[#171717] hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] transition-all duration-200"
+                  >
+                    <div className="flex items-center gap-2 text-[#171717] font-medium leading-relaxed">
+                      <Icon className="w-4 h-4 text-[#0a72ef] shrink-0" />
+                      <span>{text}</span>
                     </div>
-                  );
-                })}
+                  </div>
+                ))}
               </div>
             </section>
 

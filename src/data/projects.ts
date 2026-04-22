@@ -1,3 +1,24 @@
+import type { LucideIcon } from "lucide-react";
+import {
+  Globe,
+  Paintbrush,
+  CreditCard,
+  Package,
+  Image as ImageIcon,
+  LogIn,
+  FileText,
+  Radio,
+  MessageSquare,
+  UserCircle,
+  CalendarCheck,
+  Brain,
+  ListChecks,
+  Users,
+  WifiOff,
+  CircleDot,
+  Monitor,
+} from "lucide-react";
+
 export type ProjectStatus = "completed" | "delivered" | "in-progress" | "planned";
 
 export interface Project {
@@ -7,7 +28,7 @@ export interface Project {
   description: string;
   features: string[];
   techStack: { category: string; items: string }[];
-  highlights: string[];
+  highlights: { text: string; icon: LucideIcon }[];
   images?: { src: string; title: string; description: string }[];
   badges?: string[];
   githubUrl?: string;
@@ -19,24 +40,24 @@ export interface Project {
   hideCategory?: boolean;
 }
 
-const onlineCls = "bg-[#ebf5ff] text-[#0a72ef] border-[#0a72ef]/20";
+const onlineCls = "bg-[#ebf5ff] text-[#0a72ef] border-[#0a72ef]/20 dark:bg-[#1e3a5f] dark:text-[#60a5fa] dark:border-[#60a5fa]/30";
 
 export const statusConfig: Record<ProjectStatus, { text: string; cls: string }> = {
   completed: { text: "已完成", cls: onlineCls },
   delivered: { text: "已交付", cls: onlineCls },
-  "in-progress": { text: "开发中", cls: "bg-[#fafafa] text-[#666] border-[#ebebeb]" },
-  planned: { text: "规划中", cls: "bg-[#fafafa] text-[#808080] border-[#ebebeb]" },
+  "in-progress": { text: "开发中", cls: "bg-[#fafafa] text-[#666] border-[#ebebeb] dark:bg-[#262626] dark:text-[#a3a3a3] dark:border-[#404040]" },
+  planned: { text: "规划中", cls: "bg-[#fafafa] text-[#808080] border-[#ebebeb] dark:bg-[#262626] dark:text-[#737373] dark:border-[#404040]" },
 };
 
 export const onlineStatuses: ProjectStatus[] = ["completed", "delivered"];
 
 export const badgeConfig: Record<string, string> = {
-  "开源": "bg-green-50 text-green-600 border-green-200",
-  "免费软件": "bg-orange-50 text-orange-600 border-orange-200",
-  "电商平台": "bg-blue-50 text-blue-600 border-blue-200",
-  "客户定制": "bg-purple-50 text-purple-600 border-purple-200",
+  "开源": "bg-green-50 text-green-600 border-green-200 dark:bg-green-900/30 dark:text-green-400 dark:border-green-800",
+  "免费软件": "bg-orange-50 text-orange-600 border-orange-200 dark:bg-orange-900/30 dark:text-orange-400 dark:border-orange-800",
+  "电商平台": "bg-blue-50 text-blue-600 border-blue-200 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-800",
+  "客户定制": "bg-purple-50 text-purple-600 border-purple-200 dark:bg-purple-900/30 dark:text-purple-400 dark:border-purple-800",
 };
-export const badgeDefaultCls = "bg-[#fafafa] text-[#666] border-[#ebebeb]";
+export const badgeDefaultCls = "bg-[#fafafa] text-[#666] border-[#ebebeb] dark:bg-[#262626] dark:text-[#a3a3a3] dark:border-[#404040]";
 
 export const projects: Project[] = [
   {
@@ -63,12 +84,12 @@ export const projects: Project[] = [
       { category: "测试", items: "Playwright E2E" },
     ],
     highlights: [
-      "五种语言支持，面向全球市场",
-      "从照片到肖像画的完整定制流程",
-      "Stripe + PayPal 双支付通道",
-      "完整的后台订单和内容管理",
-      "画框和背景可视化定制",
-      "Google 一键登录",
+      { text: "五种语言支持，面向全球市场", icon: Globe },
+      { text: "从照片到肖像画的完整定制流程", icon: Paintbrush },
+      { text: "Stripe + PayPal 双支付通道", icon: CreditCard },
+      { text: "完整的后台订单和内容管理", icon: Package },
+      { text: "画框和背景可视化定制", icon: ImageIcon },
+      { text: "Google 一键登录", icon: LogIn },
     ],
     images: [
       {
@@ -162,12 +183,12 @@ export const projects: Project[] = [
       { category: "路由", items: "Wouter" },
     ],
     highlights: [
-      "专家解盘与定位解析文章系统",
-      "付费内参订阅与订单管理",
-      "实时直播室与互动评论",
-      "完整的私信系统",
-      "个人中心订阅管理",
-      "签到排名系统",
+      { text: "专家解盘与定位解析文章系统", icon: FileText },
+      { text: "付费内参订阅与订单管理", icon: CreditCard },
+      { text: "实时直播室与互动评论", icon: Radio },
+      { text: "完整的私信系统", icon: MessageSquare },
+      { text: "个人中心订阅管理", icon: UserCircle },
+      { text: "签到排名系统", icon: CalendarCheck },
     ],
     images: [
       {
@@ -231,12 +252,12 @@ export const projects: Project[] = [
       { category: "动画", items: "GSAP + Framer Motion" },
     ],
     highlights: [
-      "基于心理学量表的科学评估体系",
-      "40 道专业题目，多维度深度分析",
-      "自测 / 代测双模式，覆盖不同场景",
-      "完全离线运行，数据零上传",
-      "雷达图可视化，四维度直观呈现",
-      "跨平台支持 macOS & Windows",
+      { text: "基于心理学量表的科学评估体系", icon: Brain },
+      { text: "40 道专业题目，多维度深度分析", icon: ListChecks },
+      { text: "自测 / 代测双模式，覆盖不同场景", icon: Users },
+      { text: "完全离线运行，数据零上传", icon: WifiOff },
+      { text: "雷达图可视化，四维度直观呈现", icon: CircleDot },
+      { text: "跨平台支持 macOS & Windows", icon: Monitor },
     ],
     images: [
       {
