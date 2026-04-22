@@ -64,9 +64,11 @@ export default function ProjectDetail() {
 
           <div className="mb-12">
             <div className="flex flex-wrap items-center gap-2 mb-4">
-              <span className="text-xs font-medium text-[#666] bg-[#fafafa] px-3 py-1 rounded-full border border-[#ebebeb]">
-                {project.category}
-              </span>
+              {!project.hideCategory && (
+                <span className="text-xs font-medium text-[#666] bg-[#fafafa] px-3 py-1 rounded-full border border-[#ebebeb]">
+                  {project.category}
+                </span>
+              )}
               {!project.hideStatusBadge && <StatusBadge status={project.status} />}
               {project.badges?.map((badge) => {
                 const cls =
@@ -74,7 +76,9 @@ export default function ProjectDetail() {
                     ? "bg-green-50 text-green-600 border-green-200"
                     : badge === "免费软件"
                       ? "bg-orange-50 text-orange-600 border-orange-200"
-                      : "bg-[#fafafa] text-[#666] border-[#ebebeb]";
+                      : badge === "电商平台"
+                        ? "bg-blue-50 text-blue-600 border-blue-200"
+                        : "bg-[#fafafa] text-[#666] border-[#ebebeb]";
                 return (
                   <span
                     key={badge}

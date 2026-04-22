@@ -58,65 +58,76 @@ export default function Home() {
                         >
                           {project.name}
                         </Link>
-                      {!project.hideStatusBadge && <StatusBadge status={project.status} />}
+                        {!project.hideStatusBadge && <StatusBadge status={project.status} />}
+                        {project.badges?.map((badge) => (
+                          <span
+                            key={badge}
+                            className="text-xs font-medium bg-[#fafafa] text-[#666] px-2.5 py-0.5 rounded-full border border-[#ebebeb]"
+                          >
+                            {badge}
+                          </span>
+                        ))}
+                      </div>
+                      <p className="text-[#666] text-sm leading-relaxed">{project.tagline}</p>
                     </div>
-                    <p className="text-[#666] text-sm leading-relaxed">{project.tagline}</p>
+                    {!project.hideCategory && (
+                      <span className="text-xs text-[#808080] bg-[#fafafa] px-2.5 py-0.5 rounded-full border border-[#ebebeb] whitespace-nowrap self-start">
+                        {project.category}
+                      </span>
+                    )}
                   </div>
-                  <span className="text-xs text-[#808080] bg-[#fafafa] px-2.5 py-0.5 rounded-full border border-[#ebebeb] whitespace-nowrap self-start">
-                    {project.category}
-                  </span>
-                </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 mb-4">
-                  {project.images?.[0] && (
-                    <img
-                      src={project.images[0].src}
-                      alt={project.images[0].title}
-                      className="w-full sm:w-36 rounded-lg border border-[#ebebeb] aspect-video object-cover shrink-0"
-                      loading="lazy"
-                    />
-                  )}
-                  <p className="text-[#666] text-sm leading-relaxed line-clamp-2 flex-1">
-                    {project.description}
-                  </p>
-                </div>
+                  <div className="flex flex-col sm:flex-row gap-4 mb-4">
+                    {project.images?.[0] && (
+                      <img
+                        src={project.images[0].src}
+                        alt={project.images[0].title}
+                        className="w-full sm:w-36 rounded-lg border border-[#ebebeb] aspect-video object-cover shrink-0"
+                        loading="lazy"
+                      />
+                    )}
+                    <p className="text-[#666] text-sm leading-relaxed line-clamp-2 flex-1">
+                      {project.description}
+                    </p>
+                  </div>
 
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.highlights.slice(0, 3).map((h, i) => (
-                    <span
-                      key={i}
-                      className="text-xs bg-[#ebf5ff] text-[#0a72ef] px-2 py-0.5 rounded-full font-medium"
+                  <div className="flex items-center justify-between gap-4 flex-wrap">
+                    <div className="flex items-center gap-3 flex-wrap">
+                      {project.githubUrl && (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-sm text-[#666] hover:text-[#171717] transition-colors"
+                        >
+                          GitHub
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      )}
+                      <div className="flex flex-wrap gap-2">
+                        {project.highlights.slice(0, 3).map((h, i) => (
+                          <span
+                            key={i}
+                            className="text-xs bg-[#ebf5ff] text-[#0a72ef] px-2 py-0.5 rounded-full font-medium"
+                          >
+                            {h}
+                          </span>
+                        ))}
+                        {project.highlights.length > 3 && (
+                          <span className="text-xs text-[#808080] px-1.5 py-0.5">
+                            +{project.highlights.length - 3}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <Link
+                      to={projectUrl}
+                      className="inline-flex items-center gap-1.5 text-sm font-medium text-[#171717] hover:text-black transition-colors"
                     >
-                      {h}
-                    </span>
-                  ))}
-                  {project.highlights.length > 3 && (
-                    <span className="text-xs text-[#808080] px-1.5 py-0.5">
-                      +{project.highlights.length - 3}
-                    </span>
-                  )}
-                </div>
-
-                <div className="flex items-center justify-between">
-                  {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-sm text-[#666] hover:text-[#171717] transition-colors"
-                    >
-                      GitHub
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-                  )}
-                  <Link
-                    to={projectUrl}
-                    className="inline-flex items-center gap-1.5 text-sm font-medium text-[#171717] hover:text-black transition-colors ml-auto"
-                  >
-                    了解更多
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
+                      了解更多
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
               </div>
             );
           })}

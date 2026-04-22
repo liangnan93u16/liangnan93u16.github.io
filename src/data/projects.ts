@@ -16,6 +16,7 @@ export interface Project {
   status: ProjectStatus;
   category: string;
   hideStatusBadge?: boolean;
+  hideCategory?: boolean;
 }
 
 const onlineCls = "bg-[#ebf5ff] text-[#0a72ef] border-[#0a72ef]/20";
@@ -125,6 +126,9 @@ export const projects: Project[] = [
     ],
     status: "delivered",
     category: "客户定制",
+    hideStatusBadge: true,
+    hideCategory: true,
+    badges: ["电商平台"],
   },
   {
     id: "rpi-love-calculator",
