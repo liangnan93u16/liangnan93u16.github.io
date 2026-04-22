@@ -123,13 +123,15 @@ export default function ProjectDetail() {
                     key={img.src}
                     className={`flex flex-col ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} gap-6 md:gap-8 items-center`}
                   >
-                    <img
-                      src={img.src}
-                      alt={img.title}
-                      className="w-full md:w-1/2 rounded-lg border border-[#ebebeb] aspect-video object-cover cursor-pointer"
-                      loading="lazy"
-                      onClick={() => setLightboxIndex(i)}
-                    />
+                    <div className="w-full md:w-1/2 rounded-xl border border-[#e5e7eb] shadow-[0_4px_24px_rgba(0,0,0,0.06)] overflow-hidden">
+                      <img
+                        src={img.src}
+                        alt={img.title}
+                        className="w-full aspect-video object-cover cursor-pointer"
+                        loading="lazy"
+                        onClick={() => setLightboxIndex(i)}
+                      />
+                    </div>
                     <div className="w-full md:w-1/2 space-y-3">
                       <h3 className="text-xl font-semibold text-[#171717] tracking-tight">
                         {img.title}
