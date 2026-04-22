@@ -34,6 +34,7 @@ export const badgeConfig: Record<string, string> = {
   "开源": "bg-green-50 text-green-600 border-green-200",
   "免费软件": "bg-orange-50 text-orange-600 border-orange-200",
   "电商平台": "bg-blue-50 text-blue-600 border-blue-200",
+  "客户定制": "bg-purple-50 text-purple-600 border-purple-200",
 };
 export const badgeDefaultCls = "bg-[#fafafa] text-[#666] border-[#ebebeb]";
 
@@ -135,7 +136,7 @@ export const projects: Project[] = [
     category: "客户定制",
     hideStatusBadge: true,
     hideCategory: true,
-    badges: ["电商平台"],
+    badges: ["客户定制", "电商平台"],
   },
   {
     id: "stock-analysis-platform",
@@ -204,6 +205,7 @@ export const projects: Project[] = [
     category: "客户定制",
     hideStatusBadge: true,
     hideCategory: true,
+    badges: ["客户定制"],
   },
   {
     id: "rpi-love-calculator",
