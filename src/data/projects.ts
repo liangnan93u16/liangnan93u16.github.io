@@ -313,10 +313,9 @@ export const projects: Project[] = [
       "完全本地运行，所有数据存储在 IndexedDB",
     ],
     techStack: [
-      { category: "前端框架", items: "React 18 + TypeScript + Vite" },
-      { category: "UI 组件", items: "Tailwind CSS + shadcn/ui" },
-      { category: "本地存储", items: "IndexedDB" },
-      { category: "后端", items: "Express + WebSocket" },
+      { category: "框架", items: "React 18 + TypeScript + Vite" },
+      { category: "UI", items: "Tailwind CSS + shadcn/ui" },
+      { category: "数据库", items: "IndexedDB" },
       { category: "数据处理", items: "xlsx (Excel 导入导出)" },
       { category: "算法", items: "模拟退火等启发式算法" },
     ],
@@ -330,27 +329,27 @@ export const projects: Project[] = [
     ],
     images: [
       {
-        src: "/images/seating-system-localization/1.webp",
+        src: "/images/classroom-seating-system/1.webp",
         title: "班级学生列表",
         description: "班级详情页展示学生统计概览（男生/女生人数、视力不佳、优秀学生），以及完整的学生信息表格，支持排序和搜索。",
       },
       {
-        src: "/images/seating-system-localization/2.webp",
+        src: "/images/classroom-seating-system/2.webp",
         title: "学生详情与雷达图",
         description: "点击学生后展开右侧详情面板，展示身体素质、学科成绩雷达图、性格特点、同学关系等多维度信息，支持编辑和删除。",
       },
       {
-        src: "/images/seating-system-localization/3.webp",
+        src: "/images/classroom-seating-system/3.webp",
         title: "添加学生信息",
         description: "完整的学生信息录入表单，包含姓名、学号、性别、身高、视力、性格、各科成绩等字段，同时支持设置同学关系。",
       },
       {
-        src: "/images/seating-system-localization/4.webp",
+        src: "/images/classroom-seating-system/4.webp",
         title: "可视化座位排班",
         description: "教室座位网格可视化界面，左侧提供布局设置和多种智能排座算法选项，右侧为待安排学生列表，支持拖拽调整与座位锁定。",
       },
       {
-        src: "/images/seating-system-localization/5.webp",
+        src: "/images/classroom-seating-system/5.webp",
         title: "学科自定义设置",
         description: "灵活管理班级学科，可添加、编辑、删除需要记录的学科成绩，满足不同学校和年级的个性化需求。",
       },
