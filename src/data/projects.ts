@@ -96,27 +96,27 @@ export const projects: Project[] = [
     ],
     images: [
       {
-        src: "/images/rpi-love-calculator/1.png",
+        src: "/images/rpi-love-calculator/1.webp",
         title: "简洁优雅的首页",
         description: "应用首页清晰展示核心功能，包括双视角智能评估、预计用时、核心维度数量等关键信息，让用户一目了然。",
       },
       {
-        src: "/images/rpi-love-calculator/2.png",
+        src: "/images/rpi-love-calculator/2.webp",
         title: "两种测评视角",
         description: "支持「给自己测」和「为恋人测」两种模式。给自己测深入了解自己的占有欲程度，为恋人测则从对方视角评估关系中的占有特点。",
       },
       {
-        src: "/images/rpi-love-calculator/3.png",
+        src: "/images/rpi-love-calculator/3.webp",
         title: "四大核心维度",
         description: "从控制欲望、婚恋强度、情感依赖、关系不安四个维度全面评估恋爱占有欲，每个维度都有专业的心理学量表支撑。",
       },
       {
-        src: "/images/rpi-love-calculator/5.png",
+        src: "/images/rpi-love-calculator/5.webp",
         title: "直观的评估结果",
         description: "完成测评后立即获得 RPI 指数得分和水平评级，配合渐变进度条直观展示你在占有欲光谱上的位置。",
       },
       {
-        src: "/images/rpi-love-calculator/6.png",
+        src: "/images/rpi-love-calculator/6.webp",
         title: "详细的分析报告",
         description: "不仅给出分数，更提供综合结果解释和关键发现，帮助你深入理解自己的恋爱心理特点，促进更健康的亲密关系。",
       },
