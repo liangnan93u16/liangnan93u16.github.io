@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
 import { ArrowLeft, Code2, ExternalLink, Download } from "lucide-react";
-import { getProjectById } from "../data/projects";
+import { getProjectById, badgeConfig, badgeDefaultCls } from "../data/projects";
 import StatusBadge from "../components/StatusBadge";
 import Lightbox from "../components/Lightbox";
 
@@ -70,24 +70,14 @@ export default function ProjectDetail() {
                 </span>
               )}
               {!project.hideStatusBadge && <StatusBadge status={project.status} />}
-              {project.badges?.map((badge) => {
-                const cls =
-                  badge === "开源"
-                    ? "bg-green-50 text-green-600 border-green-200"
-                    : badge === "免费软件"
-                      ? "bg-orange-50 text-orange-600 border-orange-200"
-                      : badge === "电商平台"
-                        ? "bg-blue-50 text-blue-600 border-blue-200"
-                        : "bg-[#fafafa] text-[#666] border-[#ebebeb]";
-                return (
-                  <span
-                    key={badge}
-                    className={`text-xs font-medium px-3 py-1 rounded-full border ${cls}`}
-                  >
-                    {badge}
-                  </span>
-                );
-              })}
+              {project.badges?.map((badge) => (
+                <span
+                  key={badge}
+                  className={`text-xs font-medium px-3 py-1 rounded-full border ${badgeConfig[badge] ?? badgeDefaultCls}`}
+                >
+                  {badge}
+                </span>
+              ))}
             </div>
             <h1 className="text-4xl sm:text-5xl font-semibold text-[#171717] mb-4 tracking-[-2px] leading-[1.1]">
               {project.name}

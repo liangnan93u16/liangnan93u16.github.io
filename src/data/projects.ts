@@ -30,6 +30,13 @@ export const statusConfig: Record<ProjectStatus, { text: string; cls: string }> 
 
 export const onlineStatuses: ProjectStatus[] = ["completed", "delivered"];
 
+export const badgeConfig: Record<string, string> = {
+  "开源": "bg-green-50 text-green-600 border-green-200",
+  "免费软件": "bg-orange-50 text-orange-600 border-orange-200",
+  "电商平台": "bg-blue-50 text-blue-600 border-blue-200",
+};
+export const badgeDefaultCls = "bg-[#fafafa] text-[#666] border-[#ebebeb]";
+
 export const projects: Project[] = [
   {
     id: "art-gallery-ecommerce",

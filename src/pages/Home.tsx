@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, ExternalLink } from "lucide-react";
-import { projects, onlineStatuses } from "../data/projects";
+import { projects, onlineStatuses, badgeConfig, badgeDefaultCls } from "../data/projects";
 import StatusBadge from "../components/StatusBadge";
 
 export default function Home() {
@@ -62,7 +62,7 @@ export default function Home() {
                         {project.badges?.map((badge) => (
                           <span
                             key={badge}
-                            className="text-xs font-medium bg-[#fafafa] text-[#666] px-2.5 py-0.5 rounded-full border border-[#ebebeb]"
+                            className={`text-xs font-medium px-2.5 py-0.5 rounded-full border ${badgeConfig[badge] ?? badgeDefaultCls}`}
                           >
                             {badge}
                           </span>
@@ -128,9 +128,9 @@ export default function Home() {
                       <ArrowRight className="w-4 h-4" />
                     </Link>
                   </div>
-              </div>
-            );
-          })}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
