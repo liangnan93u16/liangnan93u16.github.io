@@ -8,11 +8,12 @@ const PROJECT_GITHUB_URLS: Record<string, string> = {
   "rpi-love-calculator": "https://github.com/liangnan93u16/LoveCalculatorApp",
 };
 const HIDE_GITHUB_FOR_PROJECTS = new Set(["art-gallery-ecommerce"]);
+const PROJECT_PATH_RE = /^\/project\/([^/]+)$/;
 
 export default function Header() {
   const location = useLocation();
   const { githubUrl, showGitHub } = useMemo(() => {
-    const match = location.pathname.match(/^\/project\/([^/]+)$/);
+    const match = PROJECT_PATH_RE.exec(location.pathname);
     const projectId = match ? match[1] : null;
     const hide = projectId ? HIDE_GITHUB_FOR_PROJECTS.has(projectId) : false;
     if (projectId && PROJECT_GITHUB_URLS[projectId]) {
