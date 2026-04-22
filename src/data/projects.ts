@@ -17,6 +17,9 @@ import {
   WifiOff,
   CircleDot,
   Monitor,
+  LayoutGrid,
+  Wand2,
+  AlertCircle,
 } from "lucide-react";
 
 export type ProjectStatus = "completed" | "delivered" | "in-progress" | "planned";
@@ -289,6 +292,72 @@ export const projects: Project[] = [
     badges: ["开源", "免费软件"],
     status: "completed",
     category: "桌面应用",
+    hideStatusBadge: true,
+  },
+  {
+    id: "classroom-seating-system",
+    name: "智能排座系统",
+    tagline: "面向中小学教师的智能教室座位编排工具",
+    description:
+      "一款专为中小学教师设计的智能座位编排工具，帮助教师高效管理班级学生信息并自动生成合理的座位安排。系统记录学生的姓名、性别、身高、视力、性格、各科成绩等多维数据，支持可视化拖拽调整座位，内置多种智能排座算法（随机、身高优先、视力关怀、男女混排、互助小组），自动检测并规避学生冲突关系。所有数据存储在本地 IndexedDB，无需联网即可使用，充分保护学生隐私。",
+    features: [
+      "班级创建与管理，实时统计男生/女生/视力不佳/优秀学生人数",
+      "学生多维信息管理：姓名、性别、身高、视力、性格、学号、各科成绩",
+      "自定义学科设置，灵活配置需要记录的科目",
+      "同学关系与冲突关系标记，排座时自动规避",
+      "可视化教室座位网格，支持拖拽调整与座位锁定",
+      "多种智能排座算法：随机、身高优先、视力关怀、男女混排、成绩互助",
+      "冲突关系自动检测，高亮显示相邻冲突学生",
+      "Excel 模板导入与批量导出学生数据",
+      "座位方案保存与加载，支持多次调整对比",
+      "完全本地运行，所有数据存储在 IndexedDB",
+    ],
+    techStack: [
+      { category: "前端框架", items: "React 18 + TypeScript + Vite" },
+      { category: "UI 组件", items: "Tailwind CSS + shadcn/ui" },
+      { category: "本地存储", items: "IndexedDB" },
+      { category: "后端", items: "Express + WebSocket" },
+      { category: "数据处理", items: "xlsx (Excel 导入导出)" },
+      { category: "算法", items: "模拟退火等启发式算法" },
+    ],
+    highlights: [
+      { text: "全面的学生多维档案管理", icon: Users },
+      { text: "可视化拖拽座位编排", icon: LayoutGrid },
+      { text: "模拟退火等智能排座算法", icon: Wand2 },
+      { text: "冲突关系自动检测与规避", icon: AlertCircle },
+      { text: "完全本地运行，数据零上传", icon: WifiOff },
+      { text: "Excel 批量导入导出", icon: FileText },
+    ],
+    images: [
+      {
+        src: "/images/seating-system-localization/1.webp",
+        title: "班级学生列表",
+        description: "班级详情页展示学生统计概览（男生/女生人数、视力不佳、优秀学生），以及完整的学生信息表格，支持排序和搜索。",
+      },
+      {
+        src: "/images/seating-system-localization/2.webp",
+        title: "学生详情与雷达图",
+        description: "点击学生后展开右侧详情面板，展示身体素质、学科成绩雷达图、性格特点、同学关系等多维度信息，支持编辑和删除。",
+      },
+      {
+        src: "/images/seating-system-localization/3.webp",
+        title: "添加学生信息",
+        description: "完整的学生信息录入表单，包含姓名、学号、性别、身高、视力、性格、各科成绩等字段，同时支持设置同学关系。",
+      },
+      {
+        src: "/images/seating-system-localization/4.webp",
+        title: "可视化座位排班",
+        description: "教室座位网格可视化界面，左侧提供布局设置和多种智能排座算法选项，右侧为待安排学生列表，支持拖拽调整与座位锁定。",
+      },
+      {
+        src: "/images/seating-system-localization/5.webp",
+        title: "学科自定义设置",
+        description: "灵活管理班级学科，可添加、编辑、删除需要记录的学科成绩，满足不同学校和年级的个性化需求。",
+      },
+    ],
+    badges: ["免费软件"],
+    status: "completed",
+    category: "教育工具",
     hideStatusBadge: true,
   },
 ];
