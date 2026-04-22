@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Code2, ExternalLink, Download, CheckCircle2, Zap, Info } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ArrowLeft, Code2, ExternalLink, Download, CheckCircle2, Zap, Info, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { getProjectById, statusConfig } from "../data/projects";
 import StatusBadge from "../components/StatusBadge";
 
@@ -30,6 +31,24 @@ function ProjectLink({
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
   const project = getProjectById(id || "");
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setLightboxIndex(null);
+      if (lightboxIndex === null) return;
+      if (e.key === "ArrowLeft" && project?.images) {
+        setLightboxIndex((prev) => (prev === null ? null : Math.max(0, prev - 1)));
+      }
+      if (e.key === "ArrowRight" && project?.images) {
+        setLightboxIndex((prev) =>
+          prev === null ? null : Math.min(project.images!.length - 1, prev + 1)
+        );
+      }
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightboxIndex, project?.images]);
 
   if (!project) {
     return (
@@ -47,153 +66,201 @@ export default function ProjectDetail() {
     );
   }
 
-
   return (
-    <div className="flex flex-col min-h-[calc(100svh-56px)]">
-      <div className="max-w-3xl mx-auto px-6 py-8 w-full flex-1">
-        {/* Breadcrumb */}
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 text-sm text-[#666] hover:text-[#171717] transition-colors mb-8"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          返回项目列表
-        </Link>
+    <>
+      <div className="flex flex-col min-h-[calc(100svh-56px)]">
+        <div className="max-w-3xl mx-auto px-6 py-8 w-full flex-1">
+          {/* Breadcrumb */}
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 text-sm text-[#666] hover:text-[#171717] transition-colors mb-8"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            返回项目列表
+          </Link>
 
-        {/* Header */}
-        <div className="mb-10">
-          <div className="flex flex-wrap items-center gap-3 mb-3">
-            <span className="text-xs bg-[#fafafa] text-[#666] px-2.5 py-1 rounded-full border border-[#ebebeb]">
-              {project.category}
-            </span>
-            <StatusBadge status={project.status} />
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-semibold text-[#171717] mb-3 tracking-tight">
-            {project.name}
-          </h1>
-          <p className="text-lg text-[#666] leading-relaxed">
-            {project.tagline}
-          </p>
-        </div>
-
-        {/* Links */}
-        <div className="flex flex-wrap gap-3 mb-12">
-          {project.githubUrl && (
-            <ProjectLink href={project.githubUrl} icon={Code2} variant="primary">
-              GitHub 仓库
-            </ProjectLink>
-          )}
-          {project.demoUrl && (
-            <ProjectLink href={project.demoUrl} icon={ExternalLink}>
-              在线演示
-            </ProjectLink>
-          )}
-          {project.downloadUrl && (
-            <ProjectLink href={project.downloadUrl} icon={Download}>
-              下载安装
-            </ProjectLink>
-          )}
-        </div>
-
-        <div className="space-y-10">
-          {/* Images */}
-          {project.images && project.images.length > 0 && (
-            <section className="space-y-12">
-              {project.images.map((img, i) => (
-                <div
-                  key={img.src}
-                  className={`flex flex-col ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} gap-6 md:gap-8 items-center`}
-                >
-                  <img
-                    src={img.src}
-                    alt={img.title}
-                    className="w-full md:w-1/2 rounded-lg border border-[#ebebeb] aspect-video object-cover"
-                    loading="lazy"
-                  />
-                  <div className="w-full md:w-1/2 space-y-3">
-                    <h3 className="text-xl font-semibold text-[#171717] tracking-tight">
-                      {img.title}
-                    </h3>
-                    <p className="text-[#666] leading-relaxed">
-                      {img.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </section>
-          )}
-
-          {/* Description */}
-          <section>
-            <h2 className="text-xl font-semibold text-[#171717] mb-4 tracking-tight">项目介绍</h2>
-            <p className="text-[#666] leading-relaxed whitespace-pre-line">
-              {project.description}
+          {/* Header */}
+          <div className="mb-10">
+            <div className="flex flex-wrap items-center gap-3 mb-3">
+              <span className="text-xs bg-[#fafafa] text-[#666] px-2.5 py-1 rounded-full border border-[#ebebeb]">
+                {project.category}
+              </span>
+              <StatusBadge status={project.status} />
+            </div>
+            <h1 className="text-3xl sm:text-4xl font-semibold text-[#171717] mb-3 tracking-tight">
+              {project.name}
+            </h1>
+            <p className="text-lg text-[#666] leading-relaxed">
+              {project.tagline}
             </p>
-          </section>
+          </div>
 
-          {/* Highlights */}
-          <section>
-            <div className="flex items-center gap-2 mb-5">
-              <Zap className="w-5 h-5 text-[#0a72ef]" />
-              <h2 className="text-xl font-semibold text-[#171717] tracking-tight">核心亮点</h2>
-            </div>
-            <div className="grid sm:grid-cols-2 gap-3">
-              {project.highlights.map((h, i) => (
-                <div
-                  key={i}
-                  className="bg-white border border-[#ebebeb] rounded-lg p-5 hover:border-[#171717] hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] transition-all duration-200"
-                >
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-md bg-[#ebf5ff] flex items-center justify-center shrink-0 mt-0.5">
-                      <span className="text-sm font-semibold text-[#0a72ef]">{i + 1}</span>
+          {/* Links */}
+          <div className="flex flex-wrap gap-3 mb-12">
+            {project.githubUrl && (
+              <ProjectLink href={project.githubUrl} icon={Code2} variant="primary">
+                GitHub 仓库
+              </ProjectLink>
+            )}
+            {project.demoUrl && (
+              <ProjectLink href={project.demoUrl} icon={ExternalLink}>
+                在线演示
+              </ProjectLink>
+            )}
+            {project.downloadUrl && (
+              <ProjectLink href={project.downloadUrl} icon={Download}>
+                下载安装
+              </ProjectLink>
+            )}
+          </div>
+
+          <div className="space-y-10">
+            {/* Images */}
+            {project.images && project.images.length > 0 && (
+              <section className="space-y-12">
+                {project.images.map((img, i) => (
+                  <div
+                    key={img.src}
+                    className={`flex flex-col ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} gap-6 md:gap-8 items-center`}
+                  >
+                    <img
+                      src={img.src}
+                      alt={img.title}
+                      className="w-full md:w-1/2 rounded-lg border border-[#ebebeb] aspect-video object-cover cursor-pointer"
+                      loading="lazy"
+                      onClick={() => setLightboxIndex(i)}
+                    />
+                    <div className="w-full md:w-1/2 space-y-3">
+                      <h3 className="text-xl font-semibold text-[#171717] tracking-tight">
+                        {img.title}
+                      </h3>
+                      <p className="text-[#666] leading-relaxed">
+                        {img.description}
+                      </p>
                     </div>
-                    <p className="text-[#171717] text-sm font-medium leading-relaxed">{h}</p>
                   </div>
-                </div>
-              ))}
-            </div>
-          </section>
+                ))}
+              </section>
+            )}
 
-          {/* Features */}
-          <section>
-            <h2 className="text-xl font-semibold text-[#171717] mb-4 tracking-tight">功能特性</h2>
-            <ul className="space-y-3">
-              {project.features.map((feature, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-[#0a72ef] mt-0.5 shrink-0" />
-                  <span className="text-[#666] leading-relaxed">{feature}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
+            {/* Description */}
+            <section>
+              <h2 className="text-xl font-semibold text-[#171717] mb-4 tracking-tight">项目介绍</h2>
+              <p className="text-[#666] leading-relaxed whitespace-pre-line">
+                {project.description}
+              </p>
+            </section>
 
-          {/* Project Info */}
-          <section>
-            <div className="flex items-center gap-2 mb-4">
-              <Info className="w-5 h-5 text-[#0a72ef]" />
-              <h2 className="text-xl font-semibold text-[#171717] tracking-tight">项目信息</h2>
-            </div>
-            <div className="bg-[#fafafa] border border-[#ebebeb] rounded-lg p-5">
-              <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm">
-                <div className="flex items-center gap-2">
-                  <span className="text-[#808080]">状态</span>
-                  <span className="font-medium text-[#171717]">{statusConfig[project.status].text}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-[#808080]">分类</span>
-                  <span className="font-medium text-[#171717]">{project.category}</span>
-                </div>
-                {project.githubUrl && (
-                  <div className="flex items-center gap-2">
-                    <span className="text-[#808080]">开源</span>
-                    <span className="font-medium text-[#0a72ef]">是</span>
-                  </div>
-                )}
+            {/* Highlights */}
+            <section>
+              <div className="flex items-center gap-2 mb-5">
+                <Zap className="w-5 h-5 text-[#0a72ef]" />
+                <h2 className="text-xl font-semibold text-[#171717] tracking-tight">核心亮点</h2>
               </div>
-            </div>
-          </section>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {project.highlights.map((h, i) => (
+                  <div
+                    key={i}
+                    className="bg-white border border-[#ebebeb] rounded-lg p-5 hover:border-[#171717] hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] transition-all duration-200"
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-md bg-[#ebf5ff] flex items-center justify-center shrink-0 mt-0.5">
+                        <span className="text-sm font-semibold text-[#0a72ef]">{i + 1}</span>
+                      </div>
+                      <p className="text-[#171717] text-sm font-medium leading-relaxed">{h}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Features */}
+            <section>
+              <h2 className="text-xl font-semibold text-[#171717] mb-4 tracking-tight">功能特性</h2>
+              <ul className="space-y-3">
+                {project.features.map((feature, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-[#0a72ef] mt-0.5 shrink-0" />
+                    <span className="text-[#666] leading-relaxed">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            {/* Project Info */}
+            <section>
+              <div className="flex items-center gap-2 mb-4">
+                <Info className="w-5 h-5 text-[#0a72ef]" />
+                <h2 className="text-xl font-semibold text-[#171717] tracking-tight">项目信息</h2>
+              </div>
+              <div className="bg-[#fafafa] border border-[#ebebeb] rounded-lg p-5">
+                <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[#808080]">状态</span>
+                    <span className="font-medium text-[#171717]">{statusConfig[project.status].text}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[#808080]">分类</span>
+                    <span className="font-medium text-[#171717]">{project.category}</span>
+                  </div>
+                  {project.githubUrl && (
+                    <div className="flex items-center gap-2">
+                      <span className="text-[#808080]">开源</span>
+                      <span className="font-medium text-[#0a72ef]">是</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </section>
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* Lightbox */}
+      {lightboxIndex !== null && project.images && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center"
+          onClick={() => setLightboxIndex(null)}
+        >
+          <button
+            className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors p-2"
+            onClick={() => setLightboxIndex(null)}
+          >
+            <X className="w-6 h-6" />
+          </button>
+
+          {lightboxIndex > 0 && (
+            <button
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors p-2"
+              onClick={(e) => {
+                e.stopPropagation();
+                setLightboxIndex(lightboxIndex - 1);
+              }}
+            >
+              <ChevronLeft className="w-8 h-8" />
+            </button>
+          )}
+
+          {lightboxIndex < project.images.length - 1 && (
+            <button
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors p-2"
+              onClick={(e) => {
+                e.stopPropagation();
+                setLightboxIndex(lightboxIndex + 1);
+              }}
+            >
+              <ChevronRight className="w-8 h-8" />
+            </button>
+          )}
+
+          <img
+            src={project.images[lightboxIndex].src}
+            alt={project.images[lightboxIndex].title}
+            className="max-w-[90vw] max-h-[85vh] rounded-lg object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+    </>
   );
 }
