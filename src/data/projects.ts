@@ -450,10 +450,5 @@ export function getProjectById(id: string): Project | undefined {
 }
 
 export function getApplicationCategory(category: string): string {
-  const map: Record<string, string> = {
-    "桌面应用": "UtilitiesApplication",
-    "教育工具": "EducationalApplication",
-    "客户定制": "BusinessApplication",
-  };
-  return map[category] ?? "SoftwareApplication";
+  return applicationCategoryMap[category] ?? "SoftwareApplication";
 }
