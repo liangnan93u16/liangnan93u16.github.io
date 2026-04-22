@@ -25,7 +25,7 @@ export const statusConfig: Record<ProjectStatus, { text: string; cls: string }> 
 export const projects: Project[] = [
   {
     id: "art-gallery-ecommerce",
-    name: "1st Art Gallery",
+    name: "第一画廊",
     tagline: "手工艺术复制品与定制肖像画电商平台",
     description:
       "一个完整的多语言电商网站，专注手工艺术复制品和定制肖像画销售。用户可以浏览大师名画复制品，也可以上传照片定制个人肖像画，支持画框选择和背景定制。平台支持五种语言，集成 Stripe 和 PayPal 安全支付，面向全球市场。",
