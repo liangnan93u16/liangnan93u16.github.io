@@ -23,6 +23,40 @@ export const statusConfig: Record<ProjectStatus, { text: string; cls: string }> 
 
 export const projects: Project[] = [
   {
+    id: "art-gallery-ecommerce",
+    name: "1st Art Gallery",
+    tagline: "手工艺术复制品与定制肖像画电商平台",
+    description:
+      "一个完整的多语言电商网站，专注手工艺术复制品和定制肖像画销售。用户可以浏览大师名画复制品，也可以上传照片定制个人肖像画，支持画框选择和背景定制。平台支持五种语言，集成 Stripe 和 PayPal 安全支付，面向全球市场。",
+    features: [
+      "浏览大师名画复制品，按艺术家、风格筛选",
+      "上传照片定制个人肖像画",
+      "画框选择和背景定制",
+      "多语言购物体验（英/德/法/西/中）",
+      "Stripe + PayPal 安全支付",
+      "订单追踪和账户管理",
+      "后台管理系统，支持博客发布",
+    ],
+    techStack: [
+      { category: "框架", items: "Next.js 14 App Router" },
+      { category: "UI", items: "React + shadcn/ui + Tailwind CSS" },
+      { category: "数据库", items: "PostgreSQL + Drizzle ORM" },
+      { category: "支付", items: "Stripe + PayPal" },
+      { category: "认证", items: "Google OAuth + JWT" },
+      { category: "测试", items: "Playwright E2E" },
+    ],
+    highlights: [
+      "五种语言支持，面向全球市场",
+      "从照片到肖像画的完整定制流程",
+      "Stripe + PayPal 双支付通道",
+      "完整的后台订单和内容管理",
+      "画框和背景可视化定制",
+      "Google 一键登录",
+    ],
+    status: "completed",
+    category: "Web 应用",
+  },
+  {
     id: "rpi-love-calculator",
     name: "RPI 恋爱占有欲计算器",
     tagline: "基于心理学量表的专业恋爱占有欲评估工具",
