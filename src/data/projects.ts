@@ -15,6 +15,7 @@ export interface Project {
   downloadUrl?: string;
   status: ProjectStatus;
   category: string;
+  hideStatusBadge?: boolean;
 }
 
 const onlineCls = "bg-[#ebf5ff] text-[#0a72ef] border-[#0a72ef]/20";
@@ -186,6 +187,7 @@ export const projects: Project[] = [
     badges: ["开源", "免费软件"],
     status: "completed",
     category: "桌面应用",
+    hideStatusBadge: true,
   },
 ];
 

@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
-import { ArrowLeft, Code2, ExternalLink, Download, CheckCircle2, Zap, Info } from "lucide-react";
-import { getProjectById, statusConfig } from "../data/projects";
+import { ArrowLeft, Code2, ExternalLink, Download, CheckCircle2, Zap } from "lucide-react";
+import { getProjectById } from "../data/projects";
 import StatusBadge from "../components/StatusBadge";
 import Lightbox from "../components/Lightbox";
 
@@ -69,7 +69,7 @@ export default function ProjectDetail() {
               <span className="text-xs bg-[#fafafa] text-[#666] px-2.5 py-1 rounded-full border border-[#ebebeb]">
                 {project.category}
               </span>
-              {project.id !== "rpi-love-calculator" && <StatusBadge status={project.status} />}
+              {!project.hideStatusBadge && <StatusBadge status={project.status} />}
               {project.badges?.map((badge) => {
                 const cls =
                   badge === "开源"
@@ -187,31 +187,6 @@ export default function ProjectDetail() {
               </ul>
             </section>
 
-            {/* Project Info */}
-            <section>
-              <div className="flex items-center gap-2 mb-4">
-                <Info className="w-5 h-5 text-[#0a72ef]" />
-                <h2 className="text-xl font-semibold text-[#171717] tracking-tight">项目信息</h2>
-              </div>
-              <div className="bg-[#fafafa] border border-[#ebebeb] rounded-lg p-5">
-                <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[#808080]">状态</span>
-                    <span className="font-medium text-[#171717]">{statusConfig[project.status].text}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[#808080]">分类</span>
-                    <span className="font-medium text-[#171717]">{project.category}</span>
-                  </div>
-                  {project.githubUrl && (
-                    <div className="flex items-center gap-2">
-                      <span className="text-[#808080]">开源</span>
-                      <span className="font-medium text-[#0a72ef]">是</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </section>
           </div>
         </div>
       </div>

@@ -7,17 +7,19 @@ const DEFAULT_GITHUB_URL = "https://github.com/liangnan93u16";
 const PROJECT_GITHUB_URLS: Record<string, string> = {
   "rpi-love-calculator": "https://github.com/liangnan93u16/LoveCalculatorApp",
 };
+const HIDE_GITHUB_FOR_PROJECTS = new Set(["art-gallery-ecommerce"]);
 
 export default function Header() {
   const location = useLocation();
-  const githubUrl = useMemo(() => {
+  const { githubUrl, showGitHub } = useMemo(() => {
     const match = location.pathname.match(/^\/project\/([^/]+)$/);
     const projectId = match ? match[1] : null;
+    const hide = projectId ? HIDE_GITHUB_FOR_PROJECTS.has(projectId) : false;
     if (projectId && PROJECT_GITHUB_URLS[projectId]) {
-      return PROJECT_GITHUB_URLS[projectId];
+      return { githubUrl: PROJECT_GITHUB_URLS[projectId], showGitHub: !hide };
     }
     const project = projectId ? getProjectById(projectId) : null;
-    return project?.githubUrl ?? DEFAULT_GITHUB_URL;
+    return { githubUrl: project?.githubUrl ?? DEFAULT_GITHUB_URL, showGitHub: !hide };
   }, [location.pathname]);
 
   return (
@@ -36,14 +38,16 @@ export default function Header() {
           >
             小红书
           </a>
-          <a
-            href={githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#666] hover:text-[#171717] transition-colors"
-          >
-            GitHub
-          </a>
+          {showGitHub && (
+            <a
+              href={githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#666] hover:text-[#171717] transition-colors"
+            >
+              GitHub
+            </a>
+          )}
         </nav>
       </div>
     </header>

@@ -59,7 +59,7 @@ export default function Home() {
                         >
                           {project.name}
                         </Link>
-                      {project.id !== "rpi-love-calculator" && <StatusBadge status={project.status} />}
+                      {!project.hideStatusBadge && <StatusBadge status={project.status} />}
                     </div>
                     <p className="text-[#666] text-sm leading-relaxed">{project.tagline}</p>
                   </div>
@@ -98,14 +98,7 @@ export default function Home() {
                   )}
                 </div>
 
-                <div className="flex items-center gap-4">
-                  <Link
-                    to={projectUrl}
-                    className="inline-flex items-center gap-1.5 text-sm font-medium text-[#171717] hover:text-black transition-colors"
-                  >
-                    了解更多
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
+                <div className="flex items-center justify-between">
                   {project.githubUrl && (
                     <a
                       href={project.githubUrl}
@@ -117,6 +110,13 @@ export default function Home() {
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   )}
+                  <Link
+                    to={projectUrl}
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-[#171717] hover:text-black transition-colors ml-auto"
+                  >
+                    了解更多
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </div>
               </div>
             );
