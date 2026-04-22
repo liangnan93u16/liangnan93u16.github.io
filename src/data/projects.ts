@@ -20,6 +20,8 @@ import {
   LayoutGrid,
   Wand2,
   AlertCircle,
+  Table,
+  ShieldCheck,
 } from "lucide-react";
 
 export type ProjectStatus = "completed" | "delivered" | "in-progress" | "planned";
@@ -358,6 +360,71 @@ export const projects: Project[] = [
     status: "completed",
     category: "教育工具",
     hideStatusBadge: true,
+  },
+  {
+    id: "doc-extraction-system",
+    name: "文档大模型提取系统",
+    tagline: "基于大语言模型的智能文档属性提取与结构化处理平台",
+    description:
+      "一个面向制造业的智能文档处理平台，利用大语言模型自动解析 Word 文档，提取产品属性并结构化输出。系统支持按产品类型配置专属提取提示词，通过表格关键词匹配实现精准定位，内置零件库管理和 RBAC 权限体系，支持与外部系统同步数据。",
+    features: [
+      "Word 文档上传与内容解析",
+      "大语言模型智能属性提取",
+      "表格关键词匹配与定位",
+      "按产品类型配置专属提示词",
+      "零件库管理与查询",
+      "RBAC 角色权限管理",
+      "LLM 服务商配置与切换",
+      "定时任务与同步日志",
+    ],
+    techStack: [
+      { category: "框架", items: "Next.js 16 App Router" },
+      { category: "UI", items: "React 19 + TypeScript + Tailwind CSS" },
+      { category: "数据库", items: "PostgreSQL + Prisma ORM" },
+      { category: "AI", items: "大语言模型 API" },
+      { category: "认证", items: "JWT + RBAC" },
+      { category: "部署", items: "Docker + PM2" },
+    ],
+    highlights: [
+      { text: "大语言模型驱动的智能文档解析", icon: Brain },
+      { text: "表格关键词精准匹配定位", icon: Table },
+      { text: "产品类型专属提示词配置", icon: MessageSquare },
+      { text: "完整的零件库管理体系", icon: Package },
+      { text: "RBAC 细粒度权限控制", icon: ShieldCheck },
+      { text: "多 LLM 服务商灵活切换", icon: FileText },
+    ],
+    images: [
+      {
+        src: "/images/doc-extraction-system/1.webp",
+        title: "文档解析中心",
+        description: "文档解析首页支持按产品类型（BAB/CAB/DAB 等）和时间范围筛选，可上传 docx 文件进行智能解析，清晰管理文档处理状态。",
+      },
+      {
+        src: "/images/doc-extraction-system/2.webp",
+        title: "零件属性提取",
+        description: "零件库页面以卡片网格展示从文档中提取的产品属性，包括工装编号、产品编码、工艺参数等，支持编辑和复制操作。",
+      },
+      {
+        src: "/images/doc-extraction-system/3.webp",
+        title: "角色管理",
+        description: "系统角色管理页面展示所有角色的数据范围、用户数、权限数和状态，支持创建、编辑和启停用角色，灵活配置组织架构。",
+      },
+      {
+        src: "/images/doc-extraction-system/4.webp",
+        title: "权限配置",
+        description: "角色权限配置界面为每个角色细粒度分配菜单访问和功能操作权限，涵盖文档上传、删除、解析、下载、零件库管理等操作。",
+      },
+      {
+        src: "/images/doc-extraction-system/5.webp",
+        title: "大模型配置",
+        description: "LLM 服务配置页面支持配置模型提供商、Base URL、Temperature、Max Tokens 等参数，同时提供系统缺省提示词的统一配置。",
+      },
+    ],
+    status: "delivered",
+    category: "客户定制",
+    hideStatusBadge: true,
+    hideCategory: true,
+    badges: ["客户定制"],
   },
 ];
 
