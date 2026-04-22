@@ -102,10 +102,10 @@ export default function ProjectDetail() {
               <div className="grid gap-4">
                 {project.images.map((src, i) => (
                   <img
-                    key={i}
+                    key={src}
                     src={src}
                     alt={`${project.name} 截图 ${i + 1}`}
-                    className="w-full rounded-lg border border-[#ebebeb]"
+                    className="w-full rounded-lg border border-[#ebebeb] aspect-video object-cover"
                     loading="lazy"
                   />
                 ))}
