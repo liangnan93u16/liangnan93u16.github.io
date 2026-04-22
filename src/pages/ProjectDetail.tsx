@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
-import { ArrowLeft, Code2, ExternalLink, Download, CheckCircle2, Zap } from "lucide-react";
+import { ArrowLeft, Code2, ExternalLink, Download } from "lucide-react";
 import { getProjectById } from "../data/projects";
 import StatusBadge from "../components/StatusBadge";
 import Lightbox from "../components/Lightbox";
@@ -64,9 +64,9 @@ export default function ProjectDetail() {
           </Link>
 
           {/* Header */}
-          <div className="mb-10">
-            <div className="flex flex-wrap items-center gap-3 mb-3">
-              <span className="text-xs bg-[#fafafa] text-[#666] px-2.5 py-1 rounded-full border border-[#ebebeb]">
+          <div className="mb-12">
+            <div className="flex flex-wrap items-center gap-2 mb-4">
+              <span className="text-xs font-medium text-[#666] bg-[#fafafa] px-3 py-1 rounded-full border border-[#ebebeb]">
                 {project.category}
               </span>
               {!project.hideStatusBadge && <StatusBadge status={project.status} />}
@@ -80,17 +80,17 @@ export default function ProjectDetail() {
                 return (
                   <span
                     key={badge}
-                    className={`text-xs px-2.5 py-1 rounded-full border ${cls}`}
+                    className={`text-xs font-medium px-3 py-1 rounded-full border ${cls}`}
                   >
                     {badge}
                   </span>
                 );
               })}
             </div>
-            <h1 className="text-3xl sm:text-4xl font-semibold text-[#171717] mb-3 tracking-tight">
+            <h1 className="text-4xl sm:text-5xl font-semibold text-[#171717] mb-4 tracking-[-2px] leading-[1.1]">
               {project.name}
             </h1>
-            <p className="text-lg text-[#666] leading-relaxed">
+            <p className="text-xl text-[#666] leading-relaxed max-w-3xl">
               {project.tagline}
             </p>
           </div>
@@ -155,22 +155,14 @@ export default function ProjectDetail() {
 
             {/* Highlights */}
             <section>
-              <div className="flex items-center gap-2 mb-5">
-                <Zap className="w-5 h-5 text-[#0a72ef]" />
-                <h2 className="text-xl font-semibold text-[#171717] tracking-tight">核心亮点</h2>
-              </div>
-              <div className="grid sm:grid-cols-2 gap-3">
+              <h2 className="text-2xl font-semibold text-[#171717] mb-6 tracking-tight">核心亮点</h2>
+              <div className="grid sm:grid-cols-2 gap-4">
                 {project.highlights.map((h, i) => (
                   <div
                     key={i}
-                    className="bg-white border border-[#ebebeb] rounded-lg p-5 hover:border-[#171717] hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] transition-all duration-200"
+                    className="bg-white border border-[#ebebeb] rounded-xl p-6 hover:border-[#171717] hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] transition-all duration-200"
                   >
-                    <div className="flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-md bg-[#ebf5ff] flex items-center justify-center shrink-0 mt-0.5">
-                        <span className="text-sm font-semibold text-[#0a72ef]">{i + 1}</span>
-                      </div>
-                      <p className="text-[#171717] text-sm font-medium leading-relaxed">{h}</p>
-                    </div>
+                    <p className="text-[#171717] font-medium leading-relaxed">{h}</p>
                   </div>
                 ))}
               </div>
@@ -178,15 +170,15 @@ export default function ProjectDetail() {
 
             {/* Features */}
             <section>
-              <h2 className="text-xl font-semibold text-[#171717] mb-4 tracking-tight">功能特性</h2>
-              <ul className="space-y-3">
+              <h2 className="text-2xl font-semibold text-[#171717] mb-6 tracking-tight">功能特性</h2>
+              <div className="grid sm:grid-cols-2 gap-x-8 gap-y-4">
                 {project.features.map((feature, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-[#0a72ef] mt-0.5 shrink-0" />
+                  <div key={i} className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#171717] mt-2 shrink-0" />
                     <span className="text-[#666] leading-relaxed">{feature}</span>
-                  </li>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </section>
 
           </div>
