@@ -67,27 +67,31 @@ export default function ProjectDetail() {
   const pageDesc = project.description;
   const ogImage = project.images?.[0]?.src ? `${SITE_URL}${project.images[0].src}` : undefined;
 
-  const jsonLd: Record<string, unknown> = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: project.name,
-    description: project.description,
-    applicationCategory: getApplicationCategory(project.category),
-    url: pageUrl,
-    screenshot: project.images?.map((img) => `${SITE_URL}${img.src}`) ?? [],
-  };
-
-  if (project.category === "桌面应用") {
-    jsonLd.operatingSystem = "macOS, Windows";
-  }
-
-  if (project.badges?.some((b) => b === "免费软件" || b === "开源")) {
-    jsonLd.offers = {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "CNY",
+  const jsonLd = useMemo(() => {
+    const data: Record<string, unknown> = {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: project.name,
+      description: project.description,
+      applicationCategory: getApplicationCategory(project.category),
+      url: pageUrl,
+      screenshot: project.images?.map((img) => `${SITE_URL}${img.src}`) ?? [],
     };
-  }
+
+    if (project.category === "桌面应用") {
+      data.operatingSystem = "macOS, Windows";
+    }
+
+    if (project.badges?.some((b) => b === "免费软件" || b === "开源")) {
+      data.offers = {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "CNY",
+      };
+    }
+
+    return data;
+  }, [project, pageUrl]);
 
   return (
     <>
